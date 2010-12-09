@@ -1,3 +1,5 @@
+require 'bundler/capistrano'
+
 set :application, "opac"
 set :repository,  "git://github.com/akil-rails/opac_app.git"
 
