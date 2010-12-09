@@ -1,0 +1,37 @@
+.masthead {
+  background: url(../images/imgMasthead.jpg);
+  margin:0px;
+  height:92px; 
+  background-color:#B51F24;
+  background-repeat:no-repeat;
+  background-position:right;
+}
+
+#logo {
+	position:relative;
+	top:20px;
+	left:20px;
+}
+
+.round {
+  -moz-border-radius:    10px;
+  -webkit-border-radius: 10px;
+  border-radius:         10px;
+}
+
+a.signup_button {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  text-align: center;
+  width: 150px;
+  color: #fff;
+  background: #B51F24;
+  font-size: 150%;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.redbox {
+	background-color:#00CCFF;
+}

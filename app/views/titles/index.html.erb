@@ -1,0 +1,89 @@
+<div class="span-24 last">
+	<%= form_tag titles_path, :id => 'searchForm', :method => 'get' do -%>
+			<%= field_set_tag 'Search' do %>		
+			<span>You can search by entering any text or by a specific title id or a book number.
+				In case of a text search, results will including matching titles, authors and publishers.
+				<br/>
+				You can refine your search (limit results) by choosing a category, publisher or author.
+			</span>
+			<br/>
+			<%= label_tag 'Title Id'%>
+			<%= text_field_tag :queryTitleId, params[:queryTitleId] %>
+			<br/>
+			<%= label_tag 'Keywords'%>
+			<%= text_field_tag :query, params[:query], :size => 100 %>
+			<%= submit_tag "Submit", :name => nil %>
+			<%= hidden_field_tag :facetCategory, params[:facetCategory] %>
+			<%= hidden_field_tag :facetPublisher, params[:facetPublisher] %>
+			<%= hidden_field_tag :facetAuthor, params[:facetAuthor] %>
+			<% end -%>
+	<% end -%>
+</div>
+<div class="span-4 colborder">
+	<h4 class="alt"> Refine by Category </h4>
+	  <ol class="facet">
+	    <% for row in @searchResults.facet(:category_id).rows -%>
+	      <li>
+					<%= link_to_function(row.instance.name) do |page|
+						page[:facetCategory].value = row.value;
+						page[:searchForm].submit();
+					end -%> 
+					(<%= row.count %>)
+					<%= button_to_function('X') do |page| 
+						page[:facetCategory].value = nil;
+						page[:searchForm].submit();						
+					end if params[:facetCategory].to_i > 0 -%></li>
+	    <% end -%>
+	  </ol>
+</div>
+<div class="span-4 colborder">
+  <h4 class="alt">Refine by Publisher</h4>
+  <ol class="facet">
+    <% for row in @searchResults.facet(:publisher_id).rows -%>
+    <li>
+			<%= link_to_function(row.instance.name) do |page|
+				page[:facetPublisher].value = row.value;
+				page[:searchForm].submit();
+			end -%> 
+			(<%= row.count %>)
+			<%= button_to_function('X') do |page| 
+				page[:facetPublisher].value = nil;
+				page[:searchForm].submit();						
+			end if params[:facetPublisher].to_i > 0 -%></li>
+    <% end -%>
+  </ol>
+</div>
+<div class="span-4 colborder">
+  <h4 class="alt">Refine by Author</h4>
+  <ol class="facet">
+    <% for row in @searchResults.facet(:author_id).rows -%>
+    <li>
+			<%= link_to_function(row.instance.name) do |page|
+				page[:facetAuthor].value = row.value;
+				page[:searchForm].submit();
+			end -%> 
+			(<%= row.count %>)
+			<%= button_to_function('X') do |page| 
+				page[:facetAuthor].value = nil;
+				page[:searchForm].submit();						
+			end if params[:facetAuthor].to_i > 0 -%></li>
+    <% end -%>
+  </ol>
+</div>
+<div class="span-8 last">
+  <h4 class="alt">Results (<%= @searchResults.total %>)</h4>
+	<%= will_paginate @searchResults.results %>
+	<br/>
+	<hr/>
+	  <% @searchResults.each_hit_with_result do |hit, result| -%>
+	    <div class="box">
+	      <p class="large"><%= hit.stored(:title) %></p>
+		    <p>Title: <%= result.id %></p>
+	      <p>Publisher: <%= (hit.stored(:publisher)) %></p>
+	      <p>Author: <%= (hit.stored(:author)) %></p>
+	      <p>Category: <%= hit.stored(:category) %></p>
+		  <p class="summary"><%= hit.highlights.first.format { |p| "<strong style='color:red'>#{p}</strong>" }.html_safe if hit.highlights.length > 0 %></p>
+	    </div>
+	  <% end -%>
+	</div>
+</div>

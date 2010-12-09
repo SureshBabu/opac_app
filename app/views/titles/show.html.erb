@@ -1,0 +1,14 @@
+<table class="titles" summary="Titles">
+	<%= render @title %>
+</table>
+
+<%= form_tag title_path, :method => 'get' do -%>
+	<p>
+		<%= submit_tag "Show More Like", :name => nil %>
+		<%= hidden_field_tag "mlt", :true %>
+	</p>
+<% end -%>
+
+<% if @search -%>
+<%= render :partial => 'searchresults' %>
+<% end -%>
