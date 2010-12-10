@@ -1,6 +1,6 @@
 .bundle
 db/*.sqlite3*
-log/*.log
+log/*
 *.log
 tmp/**/*
 tmp/*
@@ -9,3 +9,4 @@ doc/app
 *.swp
 *~
 .DS_Store
+solr/data/development/*
