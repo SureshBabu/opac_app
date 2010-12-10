@@ -28,6 +28,14 @@ role :db,  "74.86.131.195", :primary => true # This is where Rails migrations wi
     after "deploy:update_code", "deploy:copy_database_configuration"
   end
 
+  namespace :deploy do
+    task :copy_sunspot_configuration do 
+      production_sunspot_config = "/disk1/rails/sunspot.yml" 
+      run "cp #{production_sunspot_config} #{release_path}/config/sunspot.yml"
+    end
+    after "deploy:update_code", "deploy:copy_sunspot_configuration"
+  end
+
  namespace :deploy do
    task :start do ; end
    task :stop do ; end
