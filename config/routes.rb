@@ -1,16 +1,8 @@
 Ibt::Application.routes.draw do
 
   devise_for :users, :path => 'accounts'
-
-  resources :publishers do
-    resources :titles
-  end
-
-  resources :titles do
-    resources :categories
-  end
   
-  resources :authors
+  resources :titles
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -61,7 +53,7 @@ Ibt::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "Publishers#index"
+  root :to => "Titles#index"
 
   # See how all your routes lay out with "rake routes"
 
