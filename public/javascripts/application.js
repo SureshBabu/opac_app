@@ -4,12 +4,14 @@ var IBTCharts = {};
 
 IBTCharts.confirmAndSubmit = function (node, eventInfo, e) {
 
-	alert(eventInfo.node.data.$config.injectInto);
-	return false;
+	var chart_id = eventInfo.node.data.$config.injectInto;
+	var frm_id = "#edit_" + chart_id.split("_").splice(1).join("_");
+
+	$(frm_id + " input#ibtr_respondent_id").val(node.label);
+	$(frm_id + " input#ibtr_event").val('assign');
+	$(frm_id + " input#ibtr_event").val('assign');
 	
-	if (confirm('Do you wish to Assign to Branch ' + node.label + '?')) {
-		alert(eventInfo.toSource());
-	} else {
-		alert('ok dont assign');
-	};	
+	$(frm_id).submit();
+
+	return false;	
 }

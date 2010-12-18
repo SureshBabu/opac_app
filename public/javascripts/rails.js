@@ -36,7 +36,6 @@ jQuery(function ($) {
          * - ajax:error    - is execute in case of error
          */
         callRemote: function () {
-	debugger;
             var el      = this,
                 method  = el.attr('method') || el.attr('data-method') || 'GET',
                 url     = el.attr('action') || el.attr('href'),

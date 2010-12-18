@@ -3,7 +3,7 @@ Opac::Application.routes.draw do
   get "stock/show"
 
   devise_for :users, :path => 'accounts'
-  
+
   resources :titles, :ibtrs, :branch
   
   match 'statistics/:title_id' => 'statistics#view'

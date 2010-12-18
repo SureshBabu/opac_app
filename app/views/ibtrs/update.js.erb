@@ -1,1 +1,7 @@
-alert('<div class="flash notice"><%= escape_javascript(flash.delete(:notice)) %></div>');
+$('<%= "#flash_#{params[:id]}" %>').html('<%= escape_javascript(render(:partial => 'layouts/flash', :locals => {:flash => flash, :flush_flash => true})) %>');
+
+<% if defined?(@ibtr) -%> 
+	$('<%= "#edit_ibtr_#{params[:id]} input#ibtr_state" %>').val('<%= @ibtr.state %>');
+	$('<%= "#edit_ibtr_#{params[:id]} input#ibtr_respondent_id" %>').val('<%= @ibtr.respondent_id %>');
+	$('<%= "#edit_ibtr_#{params[:id]} a#ibtr_respondent_name" %>').html('<%= @ibtr.respondent.name %>');
+<% end -%>

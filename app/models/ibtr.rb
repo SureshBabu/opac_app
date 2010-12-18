@@ -4,13 +4,15 @@ class Ibtr < ActiveRecord::Base
   acts_as_versioned
   
   belongs_to :title
-  belongs_to :branch
   belongs_to :membership
   
-  attr_accessor :action
+  belongs_to :branch
+  belongs_to :respondent, :class_name => 'Branch', :foreign_key => 'respondent_id'
+
+  attr_reader :event
   cattr_reader :per_page
   @@per_page = 5
-  
+
   state_machine do
     state :New # first one is the initial state
     state :Assigned
@@ -36,7 +38,18 @@ class Ibtr < ActiveRecord::Base
       transitions :to => :Received, :from => :Dispatched, :on_transition => :do_receive
     end
     event :cancel do
-      transitions :to => :Cancelled, :from => [:New, :Declined], :on_transition => :do_cancel
+      transitions :to => :Cancelled, :from => [:New, :Assigned, :Declined], :on_transition => :do_cancel
+    end
+  end
+  
+  def processEvent(event)
+    case 
+    when event.eql?('assign') then assign
+    when event.eql?('decline') then decline
+    when event.eql?('fulfill') then fulfill
+    when event.eql?('dispatch') then dispatch
+    when event.eql?('receive') then receive
+    when event.eql?('cancel') then cancel
     end
   end
   

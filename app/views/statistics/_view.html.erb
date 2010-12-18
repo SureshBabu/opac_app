@@ -1,4 +1,4 @@
-<div id="<%= "infovis#{counter}" %>" style="height:80px;width:500px;border-width:2px;border-color:black;border-style:dotted">
+<div id="<%= "chart_ibtr_#{counter}" %>" style="height:80px;width:500px;border-width:2px;border-color:black;border-style:dotted">
 	<br/>
 </div>
 
@@ -6,7 +6,7 @@
 
 IBTCharts["<%= "infovis#{counter}" %>"] = new $jit.BarChart({  
   //id of the visualization container  
-  injectInto: '<%= "infovis#{counter}" %>',  
+  injectInto: '<%= "chart_ibtr_#{counter}" %>',  
   //whether to add animations  
   animate: true,  
   //horizontal or vertical barcharts  

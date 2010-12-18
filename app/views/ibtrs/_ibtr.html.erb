@@ -6,25 +6,32 @@
 		<div class="span-8">
 			<h6 style="float:right"><%= distance_of_time_in_words(ibtr.created_at, Time.now) %> ago</h6>
 		</div>
-		<%= link_to_function image_tag("../stylesheets/plugins/buttons/icons/cross.png", :alt => ""), "$('#div_#{ibtr.id}').hide();" %>
+	</div>
+	<div id = "<%= "flash_#{ibtr.id}" %>" class="span-8">
 	</div>
 	<div id = "<%= "div_#{ibtr.id}" %>" class="span-14">
 		<div class="span-13">
 			<div class="span-10">
-				<%= form_for ibtr, :autocomplete => :off do |f| -%>
-					<%= f.label :state %>: <%= f.text_field :state %>
+				<%= form_for ibtr, :remote => :true, :html => {:autocomplete => :off}  do |f| -%>
+					<%= f.label :state %>: <%= f.text_field :state, :readonly => true, :class => :readonly %>					
 					<br/>
 					#<%= ibtr.branch_id %>:
-					<%= link_to ibtr.branch.name, '#' if ibtr.branch %> 
+					<%= link_to_unless(ibtr.branch.nil?, ibtr.branch.name, '#') %> 
 					<br/>
 					<%= membership_info(ibtr.card_id)%>
 					<br/>
-				 	#<%= link_to_function ibtr.title.id, "$('#frm_#{ibtr.id} input#title_id').val(#{ibtr.title.id});$('#frm_#{ibtr.id}').submit();" %>:
+				 	#<%= link_to_function ibtr.title.id, "$('#alt_#{ibtr.id} input#title_id').val(#{ibtr.title.id});$('#alt_#{ibtr.id}').submit();" %>:
 					<%= link_to ibtr.title.title, '#' %> 
 					<br/>
 					<br/>
-					<%= f.submit "Cancel" %>
-					<%= f.submit "Change" %>
+					<%= f.label :respondent %>: <%= f.text_field :respondent_id, :readonly => true, :size => 1, :class => :readonly %> 
+					<%= link_to_unless(ibtr.respondent.nil?, ibtr.respondent.name, '#', {:id =>'ibtr_respondent_name'}) %>
+					<br/>
+					<br/>
+					<%= f.hidden_field :event %>
+					<%= button_to_function "Cancel",  "$('#edit_ibtr_#{ibtr.id} input#ibtr_event').val('cancel');$('#edit_ibtr_#{ibtr.id}').submit();"%>
+					<%= button_to_function "Decline",  "$('#edit_ibtr_#{ibtr.id} input#ibtr_event').val('decline');$('#edit_ibtr_#{ibtr.id}').submit();"%>
+					<%= button_to_function "Fulfill",  "$('#edit_ibtr_#{ibtr.id} input#ibtr_event').val('fulfill');$('#edit_ibtr_#{ibtr.id}').submit();"%>					
 				<% end -%>
 			</div>
 			<div class="span-2">
@@ -34,11 +41,10 @@
 		</div>
 
 		<div class="span-13">
-			<%= form_tag('stock/show', :id => "frm_#{ibtr.id}", :method=>'get', :remote => true, :autocomplete => :off) do -%>
+			<%= form_tag('/stock/show', :id => "alt_#{ibtr.id}", :method=>'get', :remote => true, :autocomplete => :off) do -%>
 				<%= label_tag :title_id, 'Alternate Title Id' %>
-				<%= text_field_tag :title_id, params[:title_id], :onchange => "$('#frm_#{ibtr.id}').submit();", :size => 15  %>
+				<%= text_field_tag :title_id, params[:title_id], :onchange => "$('#alt_#{ibtr.id}').submit();", :size => 15  %>
 				<%= text_field_tag "title_#{ibtr.id}", params[:title_name], :disabled => true, :size => 30  %>
-				<%= link_to "Change", "#"%>
 				<%= hidden_field_tag :result, params[:result], :value => "#{ibtr.id}" %>
 			<% end -%>
 		</div>
