@@ -20,8 +20,8 @@
 					<br/>
 					<%= membership_info(ibtr.card_id)%>
 					<br/>
-				 	#<%= link_to_function ibtr.title.id, "$('#alt_#{ibtr.id} input#title_id').val(#{ibtr.title.id});$('#alt_#{ibtr.id}').submit();" %>:
-					<%= link_to ibtr.title.title, '#' %> 
+				 	#<%= link_to_function ibtr.title_id, "$('#alt_#{ibtr.id} input#title_id').val(#{ibtr.title_id});$('#alt_#{ibtr.id}').submit();" %>:
+					<%= link_to_unless(ibtr.title.nil?, ibtr.title.title, '#') %> 
 					<br/>
 					<br/>
 					<%= f.label :respondent %>: <%= f.text_field :respondent_id, :readonly => true, :size => 1, :class => :readonly %> 
@@ -35,7 +35,7 @@
 				<% end -%>
 			</div>
 			<div class="span-2">
-				<%= image_tag image_url(ibtr.title.id), :size => "100x150", :alt => 'No Image', :id => "img_#{ibtr.id}" %>
+				<%= image_tag image_url(ibtr.title_id), :size => "100x150", :alt => 'No Image', :id => "img_#{ibtr.id}" %>
 			</div>
 			<br/>
 		</div>
