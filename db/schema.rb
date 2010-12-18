@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101217171821) do
+ActiveRecord::Schema.define(:version => 20101218112630) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -65,44 +65,28 @@ ActiveRecord::Schema.define(:version => 20101217171821) do
 
   # unrecognized index "index_categories_on_name_and_division" with type ActiveRecord::ConnectionAdapters::IndexDefinition
 
-  create_table "ibt_versions", :force => true do |t|
-    t.integer  "ibt_id"
+  create_table "ibtr_versions", :force => true do |t|
+    t.integer  "ibtr_id"
     t.integer  "version"
-    t.integer  "transfer_request_id"
+    t.integer  "title_id"
+    t.integer  "member_id"
+    t.string   "card_id"
+    t.integer  "branch_id"
+    t.integer  "rns_id"
     t.string   "state"
-    t.string   "created_for"
-    t.string   "assigned_to"
-    t.integer  "book_id"
-    t.integer  "alt1_title_id"
-    t.integer  "alt2_title_id"
-    t.integer  "alt3_title_id"
-    t.integer  "alt4_title_id"
-    t.integer  "alt5_title_id"
-    t.integer  "alt6_title_id"
-    t.integer  "alt7_title_id"
-    t.integer  "alt8_title_id"
-    t.integer  "alt9_title_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  # unrecognized index "index_ibt_versions_on_ibt_id" with type ActiveRecord::ConnectionAdapters::IndexDefinition
+  # unrecognized index "index_ibtr_versions_on_ibtr_id" with type ActiveRecord::ConnectionAdapters::IndexDefinition
 
-  create_table "ibts", :force => true do |t|
-    t.integer  "transfer_request_id"
+  create_table "ibtrs", :force => true do |t|
+    t.integer  "title_id"
+    t.integer  "member_id"
+    t.string   "card_id"
+    t.integer  "branch_id"
+    t.integer  "rns_id"
     t.string   "state"
-    t.string   "created_for"
-    t.string   "assigned_to"
-    t.integer  "book_id"
-    t.integer  "alt1_title_id"
-    t.integer  "alt2_title_id"
-    t.integer  "alt3_title_id"
-    t.integer  "alt4_title_id"
-    t.integer  "alt5_title_id"
-    t.integer  "alt6_title_id"
-    t.integer  "alt7_title_id"
-    t.integer  "alt8_title_id"
-    t.integer  "alt9_title_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "version"
@@ -175,17 +159,6 @@ ActiveRecord::Schema.define(:version => 20101217171821) do
     t.datetime "updated_at"
   end
 
-  create_table "transfer_requests", :force => true do |t|
-    t.integer  "title_id"
-    t.integer  "member_id"
-    t.string   "card_id"
-    t.integer  "branch_id"
-    t.integer  "rns_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "state"
-  end
-
   create_table "users", :force => true do |t|
     t.string   "username"
     t.string   "email",                               :default => "", :null => false
@@ -205,5 +178,17 @@ ActiveRecord::Schema.define(:version => 20101217171821) do
 
   # unrecognized index "index_users_on_reset_password_token" with type ActiveRecord::ConnectionAdapters::IndexDefinition
   # unrecognized index "index_users_on_username" with type ActiveRecord::ConnectionAdapters::IndexDefinition
+
+  create_table "xxx", :id => false, :force => true do |t|
+    t.integer  "id",         :default => 0, :null => false
+    t.integer  "title_id"
+    t.integer  "member_id"
+    t.string   "card_id"
+    t.integer  "branch_id"
+    t.integer  "rns_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "state"
+  end
 
 end

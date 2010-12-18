@@ -1,5 +1,7 @@
-class TransferRequest < ActiveRecord::Base
+class Ibtr < ActiveRecord::Base
   include ActiveRecord::Transitions
+  
+  acts_as_versioned
   
   belongs_to :title
   belongs_to :branch
@@ -54,5 +56,5 @@ class TransferRequest < ActiveRecord::Base
   end  
 
   def do_cancel
-  end  
+  end
 end

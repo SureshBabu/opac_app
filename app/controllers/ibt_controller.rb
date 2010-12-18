@@ -1,2 +1,0 @@
-class IbtController < ApplicationController
-end

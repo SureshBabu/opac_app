@@ -1,0 +1,52 @@
+<div class="span-14">
+	<div class="span-14">	
+		<div class="span-5">
+			<h5>Request: <%= ibtr.id %></h5>
+		</div>
+		<div class="span-8">
+			<h6 style="float:right"><%= distance_of_time_in_words(ibtr.created_at, Time.now) %> ago</h6>
+		</div>
+		<%= link_to_function image_tag("../stylesheets/plugins/buttons/icons/cross.png", :alt => ""), "$('#div_#{ibtr.id}').hide();" %>
+	</div>
+	<div id = "<%= "div_#{ibtr.id}" %>" class="span-14">
+		<div class="span-13">
+			<div class="span-10">
+				<%= form_for ibtr, :autocomplete => :off do |f| -%>
+					<%= f.label :state %>: <%= f.text_field :state %>
+					<br/>
+					#<%= ibtr.branch_id %>:
+					<%= link_to ibtr.branch.name, '#' if ibtr.branch %> 
+					<br/>
+					<%= membership_info(ibtr.card_id)%>
+					<br/>
+				 	#<%= link_to_function ibtr.title.id, "$('#frm_#{ibtr.id} input#title_id').val(#{ibtr.title.id});$('#frm_#{ibtr.id}').submit();" %>:
+					<%= link_to ibtr.title.title, '#' %> 
+					<br/>
+					<br/>
+					<%= f.submit "Cancel" %>
+					<%= f.submit "Change" %>
+				<% end -%>
+			</div>
+			<div class="span-2">
+				<%= image_tag image_url(ibtr.title.id), :size => "100x150", :alt => 'No Image', :id => "img_#{ibtr.id}" %>
+			</div>
+			<br/>
+		</div>
+
+		<div class="span-13">
+			<%= form_tag('stock/show', :id => "frm_#{ibtr.id}", :method=>'get', :remote => true, :autocomplete => :off) do -%>
+				<%= label_tag :title_id, 'Alternate Title Id' %>
+				<%= text_field_tag :title_id, params[:title_id], :onchange => "$('#frm_#{ibtr.id}').submit();", :size => 15  %>
+				<%= text_field_tag "title_#{ibtr.id}", params[:title_name], :disabled => true, :size => 30  %>
+				<%= link_to "Change", "#"%>
+				<%= hidden_field_tag :result, params[:result], :value => "#{ibtr.id}" %>
+			<% end -%>
+		</div>
+
+		<div class="span-13">
+			<%= render :partial => '/statistics/view', :locals => { :counter => ibtr.id, :title_id => ibtr.title_id } %>
+		</div>
+	</div>
+</div>
+<br/>
+<hr/>

@@ -4,7 +4,7 @@ Opac::Application.routes.draw do
 
   devise_for :users, :path => 'accounts'
   
-  resources :titles, :transfer_request, :ibt, :branch
+  resources :titles, :ibtrs, :branch
   
   match 'statistics/:title_id' => 'statistics#view'
   

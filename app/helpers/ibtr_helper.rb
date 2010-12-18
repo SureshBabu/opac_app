@@ -1,4 +1,4 @@
-module TransferRequestHelper
+module IbtrHelper
   def membership_info(cardId)
     if cardId then
       membership = Membership.find_by_card_id(cardId)
@@ -14,5 +14,5 @@ module TransferRequestHelper
     else
       "#"
     end
-  end
+  end  
 end
