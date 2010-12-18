@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-Ibt::Application.load_tasks
+Opac::Application.load_tasks

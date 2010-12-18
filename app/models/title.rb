@@ -1,4 +1,6 @@
 class Title < ActiveRecord::Base
+  establish_connection "other_#{Rails.env}"
+  
   belongs_to :publisher
   belongs_to :author
   belongs_to :category
@@ -22,5 +24,5 @@ class Title < ActiveRecord::Base
     integer :category_id, :references => Category, :stored => true
     integer :publisher_id, :references => Publisher, :stored => true
     integer :author_id, :references => Author, :stored => true
-  end  
+  end   
 end

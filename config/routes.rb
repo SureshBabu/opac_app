@@ -1,8 +1,12 @@
-Ibt::Application.routes.draw do
+Opac::Application.routes.draw do
+
+  get "stock/show"
 
   devise_for :users, :path => 'accounts'
   
-  resources :titles
+  resources :titles, :transfer_request, :ibt, :branch
+  
+  match 'statistics/:title_id' => 'statistics#view'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

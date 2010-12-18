@@ -10,6 +10,10 @@ gem 'devise'
 gem 'nokogiri'
 gem 'sunspot_rails', '1.2.rc4'
 gem "will_paginate", "~> 3.0.pre2"
+gem "transitions", :require => ["transitions", "active_record/transitions"]
+gem 'jquery-rails'
+gem 'activerecord-oracle_enhanced-adapter'
+gem 'acts_as_versioned'
 
 # Use unicorn as the web server
 # gem 'unicorn'

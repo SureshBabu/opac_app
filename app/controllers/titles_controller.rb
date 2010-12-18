@@ -47,7 +47,7 @@ class TitlesController < ApplicationController
 
 # not using more like this- not sure how this is working as of now
   def show
-    @title = Title.find(params[:queryTitleId])
+    @title = Title.find(params[:id])
 
     newSearch = Sunspot.new_more_like_this(@title, Title) do
       paginate(:page => params[:page], :per_page => 15)
