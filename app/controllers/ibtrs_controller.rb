@@ -1,6 +1,6 @@
 class IbtrsController < ApplicationController
   def index
-    @ibtrs = Ibtr.paginate :page => params[:page], :order => 'created_at DESC'
+    @ibtrs = Ibtr.search(params)
   end
   
   def update

@@ -11,7 +11,7 @@ class Ibtr < ActiveRecord::Base
 
   attr_reader :event
   cattr_reader :per_page
-  @@per_page = 5
+  @@per_page = 1
 
   state_machine do
     state :New # first one is the initial state
@@ -23,22 +23,22 @@ class Ibtr < ActiveRecord::Base
     state :Cancelled
     
     event :assign do
-      transitions :to => :Assigned, :from => [:New, :Declined], :on_transition => :do_assign
+      transitions :to => :Assigned, :from => [:New, :Declined]
     end
     event :decline do
-      transitions :to => :Declined, :from => :Assigned, :on_transition => :do_decline
+      transitions :to => :Declined, :from => :Assigned
     end
     event :fulfill do
-      transitions :to => :Fulfilled, :from => :Assigned, :on_transition => :do_fulfill
+      transitions :to => :Fulfilled, :from => :Assigned
     end
     event :dispatch do
-      transitions :to => :Dispatched, :from => :Fulfilled, :on_transition => :do_dispatch
+      transitions :to => :Dispatched, :from => :Fulfilled
     end
     event :receive do
-      transitions :to => :Received, :from => :Dispatched, :on_transition => :do_receive
+      transitions :to => :Received, :from => :Dispatched
     end
     event :cancel do
-      transitions :to => :Cancelled, :from => [:New, :Assigned, :Declined], :on_transition => :do_cancel
+      transitions :to => :Cancelled, :from => [:New, :Assigned, :Declined]
     end
   end
   
@@ -52,22 +52,16 @@ class Ibtr < ActiveRecord::Base
     when event.eql?('cancel') then cancel
     end
   end
-  
-  def do_assign
-  end
-  
-  def do_decline
-  end
-  
-  def do_fulfill
-  end
-  
-  def do_dispatch
-  end
-  
-  def do_receive
-  end  
 
-  def do_cancel
-  end
+  def self.search(params)
+    unless (params[:card_id].nil?) then
+      paginate :page => params[:page], :conditions => ['card_id = ?', params[:card_id]], :order => 'created_at, id DESC'
+    else
+      unless (params[:state].nil?) then
+        paginate :page => params[:page], :conditions => ['state = ?', params[:state]], :order => 'created_at, id DESC'
+      else
+        paginate :page => params[:page], :order => 'created_at, id DESC'
+      end
+    end
+  end  
 end
