@@ -11,7 +11,7 @@ class Ibtr < ActiveRecord::Base
 
   attr_reader :event
   cattr_reader :per_page
-  @@per_page = 1
+  @@per_page = 10
 
   state_machine do
     state :New # first one is the initial state
