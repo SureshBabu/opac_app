@@ -2,7 +2,7 @@ module IbtrHelper
   def membership_info(cardId)
     if cardId then
       membership = Membership.find_by_card_id(cardId)
-      (link_to ("#{cardId}", ibtrs_path(:card_id => "#{cardId}"))) << ": #{membership.member}: #{membership.plan}"
+      link_to "#{cardId}", ibtrs_path(:card_id => "#{cardId}")
     else
       "#Not Available: Not Available: Not Availble"
     end
