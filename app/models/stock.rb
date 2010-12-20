@@ -4,7 +4,7 @@ class Stock < ActiveRecord::Base
   def to_jit()
     {
       'label' => branch_id,
-      'values' => [in_circulation, in_store, unavailable]
+      'values' => [in_circulation_cnt, in_store_cnt, unavailable_cnt]
     }
   end
 end

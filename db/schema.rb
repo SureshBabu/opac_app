@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101218115332) do
+ActiveRecord::Schema.define(:version => 20101220083336) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -100,10 +100,10 @@ ActiveRecord::Schema.define(:version => 20101218115332) do
   create_table "stock", :id => false, :force => true do |t|
     t.integer "title_id"
     t.integer "branch_id"
-    t.integer "total"
-    t.integer "in_store"
-    t.integer "in_circulation"
-    t.integer "unavailable"
+    t.integer "in_store_cnt"
+    t.integer "in_circulation_cnt"
+    t.integer "unavailable_cnt"
+    t.integer "total_cnt"
   end
 
   create_table "titles", :force => true do |t|
