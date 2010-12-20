@@ -36,26 +36,6 @@ ActiveRecord::Schema.define(:version => 20101218115332) do
     t.datetime "updated_at"
   end
 
-  create_table "branchshelfstats", :force => true do |t|
-    t.integer "branch_id"
-    t.integer "title_id"
-    t.integer "warehousetype"
-    t.integer "available"
-    t.integer "delivered"
-    t.integer "error"
-    t.integer "weeded"
-    t.integer "damaged"
-    t.integer "unknown"
-    t.integer "lost"
-    t.integer "dispatched"
-    t.integer "cataloged"
-    t.integer "received"
-    t.integer "assigned"
-    t.integer "ibtassigned"
-    t.integer "ibtfulfilled"
-    t.integer "ibtreceived"
-  end
-
   create_table "categories", :force => true do |t|
     t.string   "name",       :null => false
     t.datetime "created_at"
@@ -145,22 +125,6 @@ ActiveRecord::Schema.define(:version => 20101218115332) do
   # unrecognized index "index_titles_on_publisher_id" with type ActiveRecord::ConnectionAdapters::IndexDefinition
   # unrecognized index "index_titles_on_title" with type ActiveRecord::ConnectionAdapters::IndexDefinition
 
-  create_table "titles_backup", :id => false, :force => true do |t|
-    t.integer  "id",                :default => 0, :null => false
-    t.string   "title",                            :null => false
-    t.integer  "author_id"
-    t.integer  "publisher_id"
-    t.integer  "yearofpublication"
-    t.integer  "edition"
-    t.integer  "category_id"
-    t.string   "isbn10"
-    t.string   "isbn13"
-    t.integer  "noofpages"
-    t.string   "language"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "users", :force => true do |t|
     t.string   "username"
     t.string   "email",                               :default => "", :null => false
@@ -180,17 +144,5 @@ ActiveRecord::Schema.define(:version => 20101218115332) do
 
   # unrecognized index "index_users_on_reset_password_token" with type ActiveRecord::ConnectionAdapters::IndexDefinition
   # unrecognized index "index_users_on_username" with type ActiveRecord::ConnectionAdapters::IndexDefinition
-
-  create_table "xxx", :id => false, :force => true do |t|
-    t.integer  "id",         :default => 0, :null => false
-    t.integer  "title_id"
-    t.integer  "member_id"
-    t.string   "card_id"
-    t.integer  "branch_id"
-    t.integer  "rns_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "state"
-  end
 
 end
