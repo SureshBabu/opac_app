@@ -1,6 +1,4 @@
-class Title < ActiveRecord::Base
-  establish_connection "other_#{Rails.env}"
-  
+class Title < ActiveRecord::Base  
   belongs_to :publisher
   belongs_to :author
   belongs_to :category
