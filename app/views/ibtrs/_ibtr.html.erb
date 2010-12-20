@@ -1,51 +1,47 @@
 <div class="span-14">
 	<div class="span-14">	
 		<div class="span-5">
-			<h5>Request: <%= ibtr.id %></h5>
+			<h4><%= "#{ibtr.state} Request: #{ibtr.id}" %></h4>
 		</div>
 		<div class="span-8">
-			<h6 style="float:right"><%= distance_of_time_in_words(ibtr.created_at, Time.now) %> ago</h6>
+			<h5 style="float:right"><%= distance_of_time_in_words(ibtr.created_at, Time.now) %> ago</h5>
 		</div>
 	</div>
 	<div id = "<%= "flash_#{ibtr.id}" %>" class="span-8">
 	</div>
 	<div id = "<%= "div_#{ibtr.id}" %>" class="span-14">
 		<div class="span-13">
-			<div class="span-10">
-				<%= form_for ibtr, :remote => :true, :html => {:autocomplete => :off}  do |f| -%>
-					<%= f.label :state %>: <%= f.text_field :state, :readonly => true, :class => :readonly %>
-					<br/>
-					#<%= ibtr.branch_id %>:
-					<% unless ibtr.branch.nil? -%>
-						<%= link_to ibtr.branch.name, '#' %> 
-					<% end -%>
-					<br/>
-					<%= membership_info(ibtr.card_id)%>
-					<br/>
-				 	#<%= link_to_function ibtr.title_id, "$('#alt_#{ibtr.id} input#title_id').val(#{ibtr.title_id});$('#alt_#{ibtr.id}').submit();" %>:
-					<% unless ibtr.title.nil? -%>
-						<%= link_to ibtr.title.title, '#' %> 
-					<% end -%>
-					<br/>
-					<br/>
-					<%= f.label :respondent %>: <%= f.text_field :respondent_id, :readonly => true, :size => 1, :class => :readonly %> 
-					<% unless ibtr.respondent.nil? -%>
-						<%= link_to ibtr.respondent.name, '#', {:id =>'ibtr_respondent_name'} %>
-					<% end -%>
-					<br/>
-					<br/>
-					<%= f.hidden_field :event %>
-					<%= raw action_buttons(ibtr.state, "#edit_ibtr_#{ibtr.id}", "input#ibtr_event") %>
-				<% end -%>
+
+			<div class="span-11" id = "<%= "div_req_#{ibtr.id}" %>">
+				<%= render :partial => 'request', :locals => { :ibtr => ibtr } %>
 			</div>
-			<div class="span-2">
+
+			<div class="span-11" id = "<%= "div_ass_#{ibtr.id}" %>" style="display:none">
+				<%= render :partial => 'assign', :locals => { :ibtr => ibtr } %>
+			</div>
+
+			<div class="span-11" id = "<%= "div_alt_#{ibtr.id}" %>" style="display:none">
+				<%= render :partial => 'alternate', :locals => { :ibtr => ibtr } %>
+			</div>
+
+			<div class="span-11" id = "<%= "div_can_#{ibtr.id}" %>" style="display:none">
+				<%= render :partial => 'cancel', :locals => { :ibtr => ibtr } %>
+			</div>
+
+			<div class="span-11" id = "<%= "div_pro_#{ibtr.id}" %>" style="display:none">
+				<%= render :partial => 'procure', :locals => { :ibtr => ibtr } %>
+			</div>
+
+			<div class="span-1 push-1">
 				<%= image_tag image_url(ibtr.title_id), :size => "100x150", :alt => 'No Image', :id => "img_#{ibtr.id}" %>
 			</div>
+
 			<br/>
 		</div>
-		<div class="span-13" style="margin-top:10px">
+		<div class="span-13" style="margin-top:10px;display:none">
 			<%= link_to_function "Show History", "", :id => "toggle_history_#{ibtr.id}", :class => "toggle_history"%>
 			(<%= ibtr.versions.length %>)
+			<%= link_to_function "Hide Stock", "", :id => "toggle_stock_#{ibtr.id}", :class => "toggle_stock"%>			
 		</div>
 		<div id=<%= "history_#{ibtr.id}" %> class="span-13 scroll-pane" style="height:160px;overflow-y:scroll;display:none">
 			<table summary="History" border="0" cellspacing="0" cellpadding="0">
@@ -57,7 +53,7 @@
 				<%= render :partial => 'ibtrversion', :collection => ibtr.versions.reverse %>
 			</table>
 		</div>
-		<div class="span-13">
+		<div class="span-13;" style="display:none">
 			<%= form_tag('/stock/show', :id => "alt_#{ibtr.id}", :method=>'get', :remote => true, :autocomplete => :off) do -%>
 				<%= label_tag :title_id, 'Alternate Title Id' %>
 				<%= text_field_tag :title_id, params[:title_id], :onchange => "$('#alt_#{ibtr.id}').submit();", :size => 15  %>
@@ -66,10 +62,6 @@
 			<% end -%>
 		</div>
 
-		<div class="span-13", id = <%= "stock_#{ibtr.id}" %> >
-			<%= render :partial => '/statistics/view', :locals => { :counter => ibtr.id, :title_id => ibtr.title_id } %>
-		</div>
 	</div>
 </div>
 <br/>
-<hr/>

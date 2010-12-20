@@ -1,7 +1,7 @@
 class StockController < ApplicationController
   def show
-    stocks = Stock.find_all_by_title_id(params[:title_id].to_i)
-    @title = Title.find(params[:title_id].to_i)
+    stocks = Stock.find_all_by_title_id(params[:id].to_i)
+    @title = Title.find(params[:id].to_i)
 
     stockArray = []
   
@@ -13,6 +13,8 @@ class StockController < ApplicationController
       'label' => ['in circulation', 'in store', 'unavailable'],
       'values' => stockArray
     }
+    
+    render :json => @stockHash
   rescue ActiveRecord::RecordNotFound
     @title = nil
     @stockHash = {

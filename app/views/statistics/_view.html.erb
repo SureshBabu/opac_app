@@ -1,58 +1,12 @@
-<div id="<%= "chart_ibtr_#{counter}" %>" style="height:80px;width:500px;border-width:2px;border-color:black;border-style:dotted">
+<div id="<%= "chart_ibtr_#{counter}" %>" class="stockchart">
 	<br/>
 </div>
 
 <%= content_for :javascript do -%>
 
-IBTCharts["<%= "infovis#{counter}" %>"] = new $jit.BarChart({  
-  //id of the visualization container  
-  injectInto: '<%= "chart_ibtr_#{counter}" %>',  
-  //whether to add animations  
-  animate: true,  
-  //horizontal or vertical barcharts  
-  orientation: 'vertical',  
-  //bars separation  
-  barsOffset: 1,  
-  //visualization offset  
-  Margin: {  
-    top:5,  
-    left: 5,  
-    right: 5,  
-    bottom:5  
-  },  
-  //labels offset position  
-  labelOffset: 5,  
-  //bars style  
-  type: 'stacked',  
-  //whether to show the aggregation of the values  
-  showAggregates:true,  
-  //whether to show the labels for the bars  
-  showLabels:true,  
-  //labels style  
-  Label: {  
-    type: 'Native', //Native or HTML  
-    size: 13,  
-    family: 'Arial',  
-    color: 'black'  
-  },  
-  //add tooltips  
-  Tips: {  
-    enable: true,  
-    onShow: function(tip, elem) {  
-      tip.innerHTML = "<b>" + elem.name + "</b>: " + elem.value;  
-    }  
-  },
-  Events: {
-		enable:true,
-		onClick: function(node, eventInfo, e) {
-			IBTCharts.confirmAndSubmit(node, eventInfo, e);
-		}
-	}
-});  
-
-
 //load JSON data.  
-IBTCharts["<%= "infovis#{counter}" %>"].loadJSON(<%= raw jitBarChart(title_id).to_json %>);
+IBTapp.ChartData["<%= "infovis#{counter}" %>"] = <%= raw jitBarChart(title_id).to_json %>;
+//IBTapp.Charts["<%= "infovis#{counter}" %>"].loadJSON(<%= raw jitBarChart(title_id).to_json %>);
 
 
 <% end -%>

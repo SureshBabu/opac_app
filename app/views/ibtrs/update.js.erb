@@ -5,6 +5,6 @@ $('<%= "#flash_#{params[:id]}" %>').html('<%= escape_javascript(render(:partial 
 	$('<%= "#edit_ibtr_#{params[:id]} input#ibtr_respondent_id" %>').val('<%= @ibtr.respondent_id %>');
 <% end -%>
 
-<% if defined?(@ibtr.respondent) -%>
+<% if defined?(@ibtr.respondent.name) -%>
 	$('<%= "#edit_ibtr_#{params[:id]} a#ibtr_respondent_name" %>').html('<%= @ibtr.respondent.name %>');
-<% end - %>
+<% end -%>

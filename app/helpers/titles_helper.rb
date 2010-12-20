@@ -1,14 +1,14 @@
 module TitlesHelper
   def titlecount
-    1
+    100000
   end
   def bookcount
-    1
+    250000
   end
   def membercount
-    1
+    30000
   end
   def librarycount
-    1
+    30
   end
 end

@@ -10,9 +10,9 @@
 	<p><%= link_to "All Requests", ibtrs_path %>	</p>
 </div>
 
-<div class="span-14 colborder">
+<div class="span-14">
 	<h4><%= "Showing All #{params[:state]} Requests" %><%= " for #{params[:card_id]}" unless params[:card_id].nil? %> (<%= @ibtrs.total_entries %>)</h4>
-	<%= will_paginate(@ibtrs) %>
 	<hr/>
+	<%= will_paginate(@ibtrs) %>
 	<%= render :partial => "ibtr", :collection => @ibtrs, :spacer_template => "ibtr_spacer" %>
 </div>

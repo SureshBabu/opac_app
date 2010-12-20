@@ -23,7 +23,7 @@ class Ibtr < ActiveRecord::Base
     state :Cancelled
     
     event :assign do
-      transitions :to => :Assigned, :from => [:New, :Declined]
+      transitions :to => :Assigned, :from => [:New, :Declined, :Cancelled]
     end
     event :decline do
       transitions :to => :Declined, :from => :Assigned

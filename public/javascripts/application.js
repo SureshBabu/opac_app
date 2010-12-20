@@ -1,20 +1,5 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
-var IBTCharts = {};
-
-IBTCharts.confirmAndSubmit = function (node, eventInfo, e) {
-
-	var chart_id = eventInfo.node.data.$config.injectInto;
-	var frm_id = "#edit_" + chart_id.split("_").splice(1).join("_");
-
-	$(frm_id + " input#ibtr_respondent_id").val(node.label);
-	$(frm_id + " input#ibtr_event").val('assign');
-	$(frm_id + " input#ibtr_event").val('assign');
-	
-	$(frm_id).submit();
-
-	return false;	
-};
 
 $('.toggle_history').live('click', function() {
 	var history_id = this.id.split("_");
@@ -31,3 +16,60 @@ $('.toggle_history').live('click', function() {
 		$(history_id).data('jsp').reinitialise();
 	}
 });
+
+$('.toggle_stock').live('click', function() {
+	var stock_id = this.id.split("_");
+	stock_id.shift();
+	stock_id = '#' + stock_id.join("_");
+	
+	$(stock_id).toggle();
+	
+	var isShown = ($(stock_id).css("display") == "none" ? false : true);
+
+	this.innerHTML = (isShown ? "Hide Stock" : "Show Stock");
+	
+	if ( isShown ) {
+		$(stock_id).data('jsp').reinitialise();
+	}
+});
+
+var IBTapp = {};
+IBTapp.Charts = {};
+IBTapp.ChartData = {};
+IBTapp.panels = ['div_req_','div_ass_','div_can_','div_pro_','div_alt_'];
+
+IBTapp.showPanel = function (paneId, panelId) {
+	$.each(IBTapp.panels, function(index, value) {
+		var id = '#' + value + paneId;
+		$(id).hide();
+	});
+	
+	$('#'+panelId).show(2000, function() {
+			debugger;
+		if (panelId.indexOf('ass') > 0) {
+
+			if (!IBTapp.Charts["stock"+paneId]) {
+				IBTapp.Charts["stock"+paneId] = new $jit.BarChart({
+				  injectInto: 'chart_ibtr_' + paneId,  
+				  animate: true,  
+				  orientation: 'vertical',  
+				  barsOffset: 1,  
+				  Margin: {top:5, left: 5, right: 5,bottom:5},
+				  labelOffset: 5,
+				  type: 'stacked',  
+				  showAggregates:true, 
+				  showLabels:true, 
+				  Label: { type: 'HTML', size: 10, family: 'Arial', color: 'black' }, 
+				  Tips: { enable: true,  
+				    onShow: function(tip, elem) {  
+				      tip.innerHTML = "<span class='tooltip'><b>  " + elem.name + "</b>: " + elem.value + "  </span>";
+				    }  
+				  }
+				});
+			}
+			
+			IBTapp.Charts["stock"+paneId].loadJSON(IBTapp.ChartData["infovis"+paneId]);
+		}
+	});
+	$('#flash_'+paneId).html('');
+}

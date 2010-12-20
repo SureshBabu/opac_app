@@ -46,3 +46,20 @@ input.readonly {
 	margin-top:20px;
 	margin-bottom:20px;
 }
+
+.comment { width: 370px; height: 15px; }
+
+.stockchart {
+	height:80px;
+	width:450px;
+	border-width:2px;
+	border-color:black;
+	border-style:dotted;
+}
+
+.tooltip {
+	background-color:lightblue;
+	border-width:1px;
+	border-color:black;	
+	border-style:solid;	
+}

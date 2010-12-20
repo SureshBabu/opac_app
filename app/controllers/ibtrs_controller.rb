@@ -6,7 +6,10 @@ class IbtrsController < ApplicationController
   def update
     @ibtr = Ibtr.find(params[:id])
     @ibtr.processEvent(params[:ibtr][:event])
-    @ibtr.update_attributes(:respondent_id => params[:ibtr][:respondent_id], :state => @ibtr.current_state)
+    @ibtr.update_attributes(:respondent_id => params[:ibtr][:respondent_id], 
+                            :reason_id => params[:ibtr][:reason_id], 
+                            :comment => params[:ibtr][:comment], 
+                            :state => @ibtr.current_state)
     flash[:notice] = "Successfully #{@ibtr.state} " << (params[:ibtr][:event].eql?("assign") ? "to #{@ibtr.respondent_id}!" : "!")
   rescue Transitions::InvalidTransition
     flash[:error] = "Cannot #{params[:ibtr][:event]} a request that is #{@ibtr.state}."

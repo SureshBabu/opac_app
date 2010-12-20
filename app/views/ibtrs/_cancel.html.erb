@@ -1,0 +1,12 @@
+<div class="span-13">
+<%= form_for ibtr, :remote => :true, :html => {:autocomplete => :off}  do |f| -%>
+	<%= f.hidden_field :event, :value => 'cancel' %>
+	<%= f.label :reason_id %> <%= f.select(:reason_id, [['Available in Home Branch', 1], ['Not Available in Any Branch', 2], ['Please Request Extra Copies', 3], ['Please Recommend Procurement', 4], ['Duplicate Request', 5]]) %>
+	<br/>
+	<%= f.label :comment %> <%= f.text_field :comment, :class => 'comment', :placeholder => 'Enter a comment' %>
+	<br/>
+	<%= f.submit 'Cancel'%>	
+<% end -%>
+<br/>
+<%= link_to_function "Go Back...", "IBTapp.showPanel(#{ibtr.id}, 'div_req_#{ibtr.id}')" %>
+</div>
