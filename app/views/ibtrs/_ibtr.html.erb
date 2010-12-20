@@ -16,16 +16,22 @@
 					<%= f.label :state %>: <%= f.text_field :state, :readonly => true, :class => :readonly %>
 					<br/>
 					#<%= ibtr.branch_id %>:
-					<%= link_to_unless(ibtr.branch.nil?, ibtr.branch.name, '#') %> 
+					<% unless ibtr.branch.nil? -%>
+						<%= link_to ibtr.branch.name, '#' %> 
+					<% end -%>
 					<br/>
 					<%= membership_info(ibtr.card_id)%>
 					<br/>
 				 	#<%= link_to_function ibtr.title_id, "$('#alt_#{ibtr.id} input#title_id').val(#{ibtr.title_id});$('#alt_#{ibtr.id}').submit();" %>:
-					<%= link_to_unless(ibtr.title.nil?, ibtr.title.title, '#') %> 
+					<% unless ibtr.title.nil? -%>
+						<%= link_to ibtr.title.title, '#' %> 
+					<% end -%>
 					<br/>
 					<br/>
 					<%= f.label :respondent %>: <%= f.text_field :respondent_id, :readonly => true, :size => 1, :class => :readonly %> 
-					<%= link_to_unless(ibtr.respondent.nil?, ibtr.respondent.name, '#', {:id =>'ibtr_respondent_name'}) %>
+					<% unless ibtr.respondent.nil? -%>
+						<%= link_to ibtr.respondent.name, '#', {:id =>'ibtr_respondent_name'} %>
+					<% end -%>
 					<br/>
 					<br/>
 					<%= f.hidden_field :event %>
