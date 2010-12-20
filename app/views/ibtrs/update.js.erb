@@ -3,5 +3,8 @@ $('<%= "#flash_#{params[:id]}" %>').html('<%= escape_javascript(render(:partial 
 <% if defined?(@ibtr) -%> 
 	$('<%= "#edit_ibtr_#{params[:id]} input#ibtr_state" %>').val('<%= @ibtr.state %>');
 	$('<%= "#edit_ibtr_#{params[:id]} input#ibtr_respondent_id" %>').val('<%= @ibtr.respondent_id %>');
-	$('<%= "#edit_ibtr_#{params[:id]} a#ibtr_respondent_name" %>').html('<%= @ibtr.respondent.name %>');
 <% end -%>
+
+<% if defined?(@ibtr.respondent) -%>
+	$('<%= "#edit_ibtr_#{params[:id]} a#ibtr_respondent_name" %>').html('<%= @ibtr.respondent.name %>');
+<% end - %>
