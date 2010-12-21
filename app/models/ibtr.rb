@@ -57,10 +57,14 @@ class Ibtr < ActiveRecord::Base
     unless (params[:card_id].nil?) then
       paginate :page => params[:page], :conditions => ['card_id = ?', params[:card_id]], :order => 'created_at, id DESC'
     else
-      unless (params[:state].nil?) then
-        paginate :page => params[:page], :conditions => ['state = ?', params[:state]], :order => 'created_at, id DESC'
+      unless (params[:member_id].nil?) then
+        paginate :page => params[:page], :conditions => ['member_id = ?', params[:member_id]], :order => 'created_at, id DESC'
       else
-        paginate :page => params[:page], :order => 'created_at, id DESC'
+        unless (params[:state].nil?) then
+          paginate :page => params[:page], :conditions => ['state = ?', params[:state]], :order => 'created_at, id DESC'
+        else
+          paginate :page => params[:page], :order => 'created_at, id DESC'
+        end
       end
     end
   end  

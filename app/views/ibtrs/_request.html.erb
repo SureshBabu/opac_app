@@ -1,4 +1,4 @@
-<%= membership_info(ibtr.card_id)%> 
+<%= membership_info(ibtr.member_id, ibtr.card_id)%> 
 has requested for
 	#<%= link_to_function ibtr.title_id, "$('#alt_#{ibtr.id} input#title_id').val(#{ibtr.title_id});$('#alt_#{ibtr.id}').submit();" %>:
 <% unless ibtr.title.nil? -%>
