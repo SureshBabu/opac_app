@@ -1,4 +1,5 @@
-<%= membership_info(ibtr.member_id, ibtr.card_id)%> 
+Member <%= link_to "#{ibtr.member_id}", ibtrs_path(:member_id => "#{ibtr.member_id}") %>,
+with card <%= link_to "#{ibtr.card_id}", ibtrs_path(:card_id => "#{ibtr.card_id}") %>
 has requested for
 	#<%= link_to_function ibtr.title_id, "$('#alt_#{ibtr.id} input#title_id').val(#{ibtr.title_id});$('#alt_#{ibtr.id}').submit();" %>:
 <% unless ibtr.title.nil? -%>

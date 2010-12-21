@@ -44,7 +44,7 @@ IBTapp.showPanel = function (paneId, panelId) {
 		$(id).hide();
 	});
 	
-	$('#'+panelId).show(2000, function() {
+	$('#'+panelId).show(600, function() {
 			debugger;
 		if (panelId.indexOf('ass') > 0) {
 

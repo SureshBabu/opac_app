@@ -1,8 +1,4 @@
-module IbtrHelper
-  def membership_info(memberId, cardId)
-    link_to "#{memberId}", ibtrs_path(:member_id => "#{memberId}")
-  end
-  
+module IbtrHelper  
   def image_url(titleId)
     if titleId then
       "http://justbooksclc.com/images/titles/#{titleId}.jpg"
