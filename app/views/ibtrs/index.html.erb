@@ -12,7 +12,8 @@
 
 <div class="span-14">
 	<h4><%= "Showing All #{params[:state]} Requests" %><%= " for #{params[:card_id]}" unless params[:card_id].nil? %> (<%= @ibtrs.total_entries %>)</h4>
-	<hr/>
+	<br/>
 	<%= will_paginate(@ibtrs) %>
+	<hr/>
 	<%= render :partial => "ibtr", :collection => @ibtrs, :spacer_template => "ibtr_spacer" %>
 </div>
