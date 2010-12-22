@@ -70,35 +70,42 @@ class Ibtr < ActiveRecord::Base
   end  
   
   def self.complexSearch(params)
-    clause = 'state IN (?)'
-    values = []
-    
-    states = ['']
+    clause = ''
+    states = []
+
     states << params[:New] unless params[:New].nil?
     states << params[:Assigned] unless params[:Assigned].nil?
     states << params[:Cancelled] unless params[:Cancelled].nil?
     states << params[:Fulfilled] unless params[:Fulfilled].nil?
     states << params[:Declined] unless params[:Declined].nil?
+
     
     case 
       when params[:searchBy].eql?("card_id")
-        clause << ' AND card_id = ?'
-        values << params[:searchText]
+        clause << ' card_id = ?'
+        values = params[:searchText]
       when params[:searchBy].eql?("member_id") 
-        clause << ' AND member_id = ?'
-        values << params[:searchText]
+        clause << ' member_id = ?'
+        values = params[:searchText]
       when params[:searchBy].eql?("title_id") 
-        clause << ' AND title_id = ?'
-        values << params[:searchText]
+        clause << ' title_id = ?'
+        values = params[:searchText]
       when params[:searchBy].eql?("branch_id") 
-        clause << ' AND branch_id = ?'
-        values << params[:branchVal]
+        clause << ' branch_id = ?'
+        values = params[:branchVal]
       when params[:searchBy].eql?("respondent_id")
-        clause << ' AND respondent_id = ?'
-        values << params[:branchVal]
+        clause << ' respondent_id = ?'
+        values = params[:branchVal]
     end
-    
-    paginate :page => params[:page], :conditions => [clause, states, values], :order => 'created_at, id DESC'
-  end
-  
+
+    if !values.nil? && values.length > 0 then
+      if states.length > 0 then
+        paginate :page => params[:page], :conditions => [clause << ' AND state IN (?)', values, states], :order => 'created_at, id DESC'
+      else
+        paginate :page => params[:page], :conditions => [clause, values], :order => 'created_at, id DESC'
+      end
+    else
+      paginate :page => params[:page], :conditions => ['state in (?)', states], :order => 'created_at, id DESC'
+    end
+  end  
 end

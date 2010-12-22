@@ -1,6 +1,6 @@
 <%= javascript_tag :defer => 'defer' do -%>
 	$(document).ready(function () {
-		IBTapp.initSearchForm('<%= params[:searchBy] %>');
+		IBTapp.initSearchForm('<%= params[:searchBy] %>', true);
 	});
 <% end -%>
 <div class="span-24">

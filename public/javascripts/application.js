@@ -75,14 +75,14 @@ IBTapp.showPanel = function (paneId, panelId) {
 };
 
 
-IBTapp.initSearchForm = function (option) {
+IBTapp.initSearchForm = function (option, onload) {
 	if (option == 'respondent_id' || option == 'branch_id') {
 		$('.ibtrSearch #branchVal').show();
 		$('.ibtrSearch #searchText').hide();
 	} else {
 		$('.ibtrSearch #branchVal').hide();
-		$('.ibtrSearch #searchText').show();		
+		$('.ibtrSearch #searchText').show();
 	}
 };
 
-$('.ibtrSearch #searchBy').live('change', function() { IBTapp.initSearchForm($('.ibtrSearch #searchBy').val()); });
+$('.ibtrSearch #searchBy').live('change', function() { IBTapp.initSearchForm($('.ibtrSearch #searchBy').val(), false); });
