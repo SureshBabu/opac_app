@@ -4,9 +4,12 @@ Opac::Application.routes.draw do
 
   devise_for :users, :path => 'accounts'
 
+  match 'ibtrs/search' => 'ibtrs#search'
   resources :titles, :ibtrs, :branch, :stock
   
   match 'statistics/:title_id' => 'statistics#view'
+  
+
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -14,4 +14,8 @@ class IbtrsController < ApplicationController
   rescue Transitions::InvalidTransition
     flash[:error] = "Cannot #{params[:ibtr][:event]} a request that is #{@ibtr.state}."
   end  
+  
+  def search
+    @ibtrs = Ibtr.complexSearch(params)
+  end
 end

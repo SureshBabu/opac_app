@@ -68,4 +68,26 @@ class Ibtr < ActiveRecord::Base
       end
     end
   end  
+  
+  def self.complexSearch(params)
+    clause = 'state IN (?) AND '
+    
+    states = ['']
+    states << params[:New] unless params[:New].nil?
+    states << params[:Assigned] unless params[:Assigned].nil?
+    states << params[:Cancelled] unless params[:Cancelled].nil?
+    states << params[:Fulfilled] unless params[:Fulfilled].nil?
+    states << params[:Declined] unless params[:Declined].nil?
+    
+    case 
+      when params[:searchBy].eql?("card_id") then clause << 'card_id = ?'
+      when params[:searchBy].eql?("member_id") then clause << 'member_id = ?'
+      when params[:searchBy].eqll?("title_id") then clause << 'title_id = ?'
+      when params[:searchBy].eql?("branch_id") then clause << 'branch_id = ?'
+      when params[:searchBy].eql?("respondent_id") then clause << 'respondent_id = ?'
+    end
+    
+    paginate :page => params[:page], :conditions => [clause, states, params[:searchText]], :order => 'created_at, id DESC'
+  end
+  
 end
