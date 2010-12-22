@@ -70,7 +70,8 @@ class Ibtr < ActiveRecord::Base
   end  
   
   def self.complexSearch(params)
-    clause = 'state IN (?) AND '
+    clause = 'state IN (?)'
+    values = []
     
     states = ['']
     states << params[:New] unless params[:New].nil?
@@ -80,14 +81,24 @@ class Ibtr < ActiveRecord::Base
     states << params[:Declined] unless params[:Declined].nil?
     
     case 
-      when params[:searchBy].eql?("card_id") then clause << 'card_id = ?'
-      when params[:searchBy].eql?("member_id") then clause << 'member_id = ?'
-      when params[:searchBy].eqll?("title_id") then clause << 'title_id = ?'
-      when params[:searchBy].eql?("branch_id") then clause << 'branch_id = ?'
-      when params[:searchBy].eql?("respondent_id") then clause << 'respondent_id = ?'
+      when params[:searchBy].eql?("card_id")
+        clause << ' AND card_id = ?'
+        values << params[:searchText]
+      when params[:searchBy].eql?("member_id") 
+        clause << ' AND member_id = ?'
+        values << params[:searchText]
+      when params[:searchBy].eql?("title_id") 
+        clause << ' AND title_id = ?'
+        values << params[:searchText]
+      when params[:searchBy].eql?("branch_id") 
+        clause << ' AND branch_id = ?'
+        values << params[:branchVal]
+      when params[:searchBy].eql?("respondent_id")
+        clause << ' AND respondent_id = ?'
+        values << params[:branchVal]
     end
     
-    paginate :page => params[:page], :conditions => [clause, states, params[:searchText]], :order => 'created_at, id DESC'
+    paginate :page => params[:page], :conditions => [clause, states, values], :order => 'created_at, id DESC'
   end
   
 end

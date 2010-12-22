@@ -72,4 +72,17 @@ IBTapp.showPanel = function (paneId, panelId) {
 		}
 	});
 	$('#flash_'+paneId).html('');
-}
+};
+
+
+IBTapp.initSearchForm = function (option) {
+	if (option == 'respondent_id' || option == 'branch_id') {
+		$('.ibtrSearch #branchVal').show();
+		$('.ibtrSearch #searchText').hide();
+	} else {
+		$('.ibtrSearch #branchVal').hide();
+		$('.ibtrSearch #searchText').show();		
+	}
+};
+
+$('.ibtrSearch #searchBy').live('change', function() { IBTapp.initSearchForm($('.ibtrSearch #searchBy').val()); });

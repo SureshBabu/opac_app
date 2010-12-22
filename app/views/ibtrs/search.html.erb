@@ -1,10 +1,15 @@
+<%= javascript_tag :defer => 'defer' do -%>
+	$(document).ready(function () {
+		IBTapp.initSearchForm('<%= params[:searchBy] %>');
+	});
+<% end -%>
 <div class="span-24">
-	<%= form_tag ibtrs_search_path, :id => 'searchForm', :method => 'get' do -%>
+	<%= form_tag ibtrs_search_path, :class=>'ibtrSearch', :method => 'get' do -%>
 			<%= field_set_tag 'Search' do %>
 				<%= label_tag 'Search By:'%>
-				<%= select_tag :searchBy, "<option selected='selected' value='card_id'>Card Id</option><option value='member_id'>Member Id</option><option value='title_id'>Title Id</option><option value='request_id'>Requesting Branch</option><option value='respondent_id'>Respondent Branch</option>".html_safe() %>
+				<%= select_tag :searchBy, options_for_select([['Card',:card_id],['Member',:member_id],['Title',:title_id],['Requesting Branch',:branch_id],['Respondent Branch',:respondent_id]], params[:searchBy]) %>
 				<%= text_field_tag :searchText, params[:searchText] %>
-			
+				<%= select_tag :branchVal, options_from_collection_for_select(Branch.all, :id, :name, params[:branchVal]) %>
 				<br/>
 				<br/>
 				<%= label_tag :New %>
@@ -24,8 +29,8 @@
 </div>
 
 <div class="span-24">
-	<h4><%= "Total Results: #{@ibtrs.total_entries} " %></h4>
-	<%= will_paginate(@ibtrs) %>
+	<h4><%= "Total Results: #{@ibtrs.total_entries} " if defined?(@ibtrs) %></h4>
+	<%= will_paginate(@ibtrs) if defined?(@ibtrs) %>
 	<hr/>
 	<div class="span-24">
 		<div class="span-1"><br/></div>
