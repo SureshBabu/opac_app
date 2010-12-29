@@ -1,0 +1,20 @@
+<h1>Listing StockItems</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @stockitems.each do |stockitem| %>
+  <tr>
+    <td><%= link_to 'Show', stockitem %></td>
+    <td><%= link_to 'Edit', edit_stockitem_path(stockitem) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Stock Item', new_stockitem_path %>

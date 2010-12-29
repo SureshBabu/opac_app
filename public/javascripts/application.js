@@ -86,3 +86,12 @@ IBTapp.initSearchForm = function (option, onload) {
 };
 
 $('.ibtrSearch #searchBy').live('change', function() { IBTapp.initSearchForm($('.ibtrSearch #searchBy').val(), false); });
+
+$('#authors th a, #authors .pagination a, #authors td a').live('click', function() {
+	$.getScript(this.href);
+	return false;
+});
+
+function test() {
+	alert('hello');
+}

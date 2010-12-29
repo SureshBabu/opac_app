@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101220170410) do
+ActiveRecord::Schema.define(:version => 20101224054907) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(:version => 20101220170410) do
     t.datetime "updated_at"
     t.string   "respondent_id"
     t.integer  "reason_id"
-    t.string   "comment"
+    t.string   "comments"
   end
 
   # unrecognized index "index_ibtr_versions_on_ibtr_id" with type ActiveRecord::ConnectionAdapters::IndexDefinition
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(:version => 20101220170410) do
     t.integer  "version"
     t.string   "respondent_id"
     t.integer  "reason_id"
-    t.string   "comment"
+    t.string   "comments"
   end
 
   create_table "memberships", :force => true do |t|
@@ -109,6 +109,23 @@ ActiveRecord::Schema.define(:version => 20101220170410) do
     t.integer "unavailable_cnt"
     t.integer "total_cnt"
   end
+
+  create_table "stockitems", :force => true do |t|
+    t.integer "title_id"
+    t.integer "author_id"
+    t.integer "category_id"
+    t.integer "publisher_id"
+    t.string  "title_name"
+    t.string  "isbn"
+    t.decimal "price",        :precision => 10, :scale => 0
+    t.string  "language"
+    t.string  "edition"
+    t.string  "pubyear"
+    t.integer "pages"
+    t.string  "binding"
+  end
+
+  # unrecognized index "index_stockitems_on_title_id" with type ActiveRecord::ConnectionAdapters::IndexDefinition
 
   create_table "titles", :force => true do |t|
     t.string   "title",             :null => false

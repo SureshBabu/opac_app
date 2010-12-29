@@ -5,7 +5,7 @@ Opac::Application.routes.draw do
   devise_for :users, :path => 'accounts'
 
   match 'ibtrs/search' => 'ibtrs#search'
-  resources :titles, :ibtrs, :branch, :stock
+  resources :titles, :authors, :ibtrs, :branch, :stock, :stockitems
   
   match 'statistics/:title_id' => 'statistics#view'
   

@@ -1,0 +1,73 @@
+<div class="span-13">
+	<div class="span-13 push-2">
+		<span>
+			The information shown below comes from our titles table. 
+			<br/>
+			Please fill in all the information accurately, this will update titles and stocklist information.
+		</span>
+	</div>
+	<%= form_for(@stockitem) do |f| -%>
+		<% if @stockitem.errors.any? %>
+		  <div id="error_explanation">
+		    <h2><%= pluralize(@stockitem.errors.count, "error") %> prohibited this stockitem from being saved:</h2>
+
+		    <ul>
+		    <% @stockitem.errors.full_messages.each do |msg| %>
+		      <li><%= msg %></li>
+		    <% end %>
+		    </ul>
+		  </div>
+		<% end %>
+
+		<div class="span-3">
+			<%= f.label 'Title', :style => 'float:right' %><br/>
+			<%= f.label 'Author', :style => 'float:right' %><br/>
+			<%= f.label 'ISBN', :style => 'float:right' %><br/>
+			<%= f.label 'Price (Rupees)', :style => 'float:right' %><br/>
+			<%= f.label 'Language', :style => 'float:right' %><br/>
+			<%= f.label 'Edition', :style => 'float:right' %><br/>
+			<%= f.label 'Published', :style => 'float:right' %><br/>
+			<%= f.label 'Pages', :style => 'float:right' %><br/>
+			<%= f.label 'Binding', :style => 'float:right' %><br/>
+			
+			<%= f.label 'Publisher', :style => 'float:right' %><br/><br/>
+			<%= f.label 'Category', :style => 'float:right' %><br/>
+
+		</div>
+		<div class="span-5">
+			<%= f.hidden_field :title_id %>
+			<%= f.hidden_field :author_id %>
+			<%= f.text_field :title_name, :size => 50, :style => 'margin:0;padding:0;' %>
+			<%= fields_for @stockitem.author do |a| -%>
+				<div class="span-8"><%= a.text_field :name, :disabled => true, :style => 'margin:0;padding:0' %><%= link_to 'Search', authors_path, :remote => true %></div>
+			<% end -%>
+			<%= f.number_field :isbn, :size => 15, :style => 'margin:0;padding:0;height:1em' %>
+			<%= f.number_field :price, :size => 15, :style => 'margin:0;padding:0;height:1em' %>
+			<%= f.text_field :language, :size => 15, :style => 'margin:0;padding:0' %>
+			<%= f.text_field :edition, :size => 15, :style => 'margin:0;padding:0' %>
+			<%= f.number_field :pubyear, :size => 5, :style => 'margin:0;padding:0' %><br/>
+			<%= f.number_field :pages, :size => 5, :style => 'margin:0;padding:0' %><br/>
+			<%= f.text_field :binding, :size => 10, :style => 'margin:0;padding:0' %>
+			<%= f.collection_select :publisher_id, Publisher.find(:all, :order => 'name'), :id, :name, :style => 'margin:0;padding:0;border-width:10px;' %>
+			<%= f.collection_select :category_id, Category.find(:all, :order => 'name'), :id, :name, :style => 'margin:0;padding:10em;' %>
+		</div>
+		
+		<div class="span-13">
+		  <%= f.submit %>
+		</div>
+	<% end -%>
+	<br/>
+	<br/>
+	<div class="span-18" id="authorSearch" style="display:none;border:solid">
+		<h3> Search Authors </h3>
+		<%= form_tag authors_path, :method => 'get', :remote => 'true' do -%>
+				<p>
+					<%= text_field_tag :search, params[:search] %>
+					<%= submit_tag "Search", :name => nil%>
+				</p>
+			<div id="authors"></div>
+		<% end -%>
+	</div>
+	<div class="span-18" id="authorPanel" style="display:none;border:solid">
+	</div>	
+</div>
