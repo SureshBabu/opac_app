@@ -2,37 +2,58 @@
 	<div class="span-15 last">
 		<%= image_tag "network.jpg", :size => "626x486", :alt => "Network", :usemap => '#NetworkMap' %>
 		<map name="NetworkMap">
-		  <area shape="rect" coords="355,123,382,181" href="/auth/nb" />
+		  provider :google_apps, OpenID::Store::Filesystem.new('/tmp'), :name => 'wf', :domain => 'wf.justbooksclc.com'
+		  provider :google_apps, OpenID::Store::Filesystem.new('/tmp'), :name => 'jpn', :domain => 'jpn.justbooksclc.com'
+		  provider :google_apps, OpenID::Store::Filesystem.new('/tmp'), :name => 'bll', :domain => 'bll.justbooksclc.com'
+		  provider :google_apps, OpenID::Store::Filesystem.new('/tmp'), :name => 'in', :domain => 'in.justbooksclc.com'
+		  provider :google_apps, OpenID::Store::Filesystem.new('/tmp'), :name => 'kn', :domain => 'kn.justbooksclc.com'
+		  provider :google_apps, OpenID::Store::Filesystem.new('/tmp'), :name => 'hsr', :domain => 'hsr.justbooksclc.com'
+		  provider :google_apps, OpenID::Store::Filesystem.new('/tmp'), :name => 'ft', :domain => 'ft.justbooksclc.com'
+		  provider :google_apps, OpenID::Store::Filesystem.new('/tmp'), :name => 'kor', :domain => 'kor.justbooksclc.com'
+		  provider :google_apps, OpenID::Store::Filesystem.new('/tmp'), :name => 'jn', :domain => 'jn.justbooksclc.com'
+		  provider :google_apps, OpenID::Store::Filesystem.new('/tmp'), :name => 'ne', :domain => 'ne.justbooksclc.com'
+		  provider :google_apps, OpenID::Store::Filesystem.new('/tmp'), :name => 'rmv', :domain => 'rmv.justbooksclc.com'
+		  provider :google_apps, OpenID::Store::Filesystem.new('/tmp'), :name => 'dmb', :domain => 'dmb.justbooksclc.com'
+		  provider :google_apps, OpenID::Store::Filesystem.new('/tmp'), :name => 'aun', :domain => 'aun.justbooksclc.com'
+		  provider :google_apps, OpenID::Store::Filesystem.new('/tmp'), :name => 'ecil', :domain => 'ecil.justbooksclc.com'
+		  provider :google_apps, OpenID::Store::Filesystem.new('/tmp'), :name => 'mlm', :domain => 'mlm.justbooksclc.com'
+		  provider :google_apps, OpenID::Store::Filesystem.new('/tmp'), :name => 'vij', :domain => 'vij.justbooksclc.com'
+		  provider :google_apps, OpenID::Store::Filesystem.new('/tmp'), :name => 'vjn', :domain => 'vjn.justbooksclc.com'
+			
+		  <area shape="rect" coords="568,143,591,186" href="/auth/wf" />
+			<area shape="rect" coords="209,266,242,340" href="/auth/jpn" />
+			<area shape="rect" coords="524,145,552,204" href="/auth/bll" />
+			<area shape="rect" coords="328,248,356,311" href="/auth/in" />
+			<area shape="rect" coords="244,123,272,182" href="/auth/kn" />
+			<area shape="rect" coords="259,357,301,437" href="/auth/hsr" />
+			<area shape="rect" coords="99,116,127,174" href="/auth/ft" />
+			<area shape="rect" coords="363,310,398,390" href="/auth/kor" />
+			<area shape="rect" coords="135,340,173,418" href="/auth/jn" />
+			<area shape="rect" coords="316,68,334,114" href="/auth/ne" />		
+		  <area shape="rect" coords="355,123,382,181" href="/auth/rmv" />
+		  <area shape="rect" coords="354,66,368,99" href="/auth/dmb" />
+			<area shape="rect" coords="396,60,416,103" href="/auth/aun" />
+			<area shape="rect" coords="188,152,213,213" href="/auth/ecil" />
+			<area shape="rect" coords="84,230,119,304" href="/auth/mlm" />
+			<area shape="rect" coords="245,70,267,108" href="/auth/vij" />
+			<area shape="rect" coords="13,209,37,270" href="/auth/vjn" />
+		
+		
 		  <area shape="rect" coords="398,155,423,216" href="/auth/Honeywell-Orion" />
 			<area shape="rect" coords="463,125,492,185" href="/auth/AOL-Bellandur" />
-		  <area shape="rect" coords="524,145,552,204" href="/auth/bl" />
-		  <area shape="rect" coords="568,143,591,186" href="/auth/wf" />
-		  <area shape="rect" coords="396,60,416,103" href="/auth/pa" />
-		  <area shape="rect" coords="354,66,368,99" href="/auth/md" />
-		  <area shape="rect" coords="245,70,267,108" href="/auth/vbl" />
-		  <area shape="rect" coords="195,78,215,127" href="/auth/sr" />
-		  <area shape="rect" coords="170,48,186,92" href="/auth/dc" />
-		  <area shape="rect" coords="151,22,165,59" href="/auth/sb" />
+		  <area shape="rect" coords="195,78,215,127" href="/auth/SarjapurRoad" />
+		  <area shape="rect" coords="170,48,186,92" href="/auth/JPNDollarsColony" />
+		  <area shape="rect" coords="151,22,165,59" href="/auth/SJRBrooklyn" />
 		  <area shape="rect" coords="111,37,130,77" href="/auth/Klubfit" />
-		  <area shape="rect" coords="76,50,91,86" href="/auth/si" />
-		  <area shape="rect" coords="44,104,63,148" href="/auth/mg" />
-		  <area shape="rect" coords="99,116,127,174" href="/auth/fz" />
-		  <area shape="rect" coords="188,152,213,213" href="/auth/Hyderabad-ECIL" />
-		  <area shape="rect" coords="244,123,272,182" href="/auth/kn" />
-		  <area shape="rect" coords="507,237,547,307" href="/auth/sk" />
+		  <area shape="rect" coords="76,50,91,86" href="/auth/SJRi-park" />
+		  <area shape="rect" coords="44,104,63,148" href="/auth/MaduraGarments" />
+		  <area shape="rect" coords="507,237,547,307" href="/auth/SKYLARK" />
 		  <area shape="rect" coords="429,215,457,280" href="/auth/Honeywell-Kalyani" />
-		  <area shape="rect" coords="466,303,508,385" href="/auth/sjw" />
-		  <area shape="rect" coords="363,310,398,390" href="/auth/ko" />
-		  <area shape="rect" coords="328,248,356,311" href="/auth/in" />
-		  <area shape="rect" coords="209,266,242,340" href="/auth/jp" />
-		  <area shape="rect" coords="154,208,184,273" href="/auth/pfs" />
-		  <area shape="rect" coords="84,230,119,304" href="/auth/Malleshwaram" />
-		  <area shape="rect" coords="13,209,37,270" href="/auth/VijayaNagar" />
-		  <area shape="rect" coords="17,296,47,369" href="/auth/bg" />
-		  <area shape="rect" coords="316,68,334,114" href="/auth/mb" />
-		  <area shape="rect" coords="135,340,173,418" href="/auth/jn" />
-		  <area shape="rect" coords="259,357,301,437" href="/auth/hs" />
-			 <area shape="circle" coords="308,214,43" href="/auth/strata" />
+		  <area shape="rect" coords="466,303,508,385" href="/auth/St.JohnsWoodsApt" />
+		  <area shape="rect" coords="154,208,184,273" href="/auth/PurvaFS" />
+		  <area shape="rect" coords="17,296,47,369" href="/auth/BrigadeGardens" />
+
+			<area shape="circle" coords="308,214,43" href="/auth/strata" />
 		</map>
 	</div>
 </div>
