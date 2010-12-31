@@ -1,23 +1,54 @@
-<div class="span-24">
-	<br/>
-</div>
 <div class="span-16	">
-	<div class="span-15 push-1 last">
-		<br/>
-		<br/>
-		<br/>				
-		<h3>Open Public Access Catalogue</h3>
-		<h4>Our collection:</h4>		
-		<ul>
-			<li> <%= pluralize(titlecount, 'title') %> </li>
-			<li> <%= pluralize(bookcount, 'book') %> </li>
-			<li> <%= pluralize(membercount, 'member') %> </li>
-			<li> <%= pluralize(librarycount, 'library') %> </li>
-		</ul>
+	<div class="span-15 last">
+		<%= image_tag "network.jpg", :size => "626x486", :alt => "Network", :usemap => '#NetworkMap' %>
+		<map name="NetworkMap">
+		  <area shape="rect" coords="355,123,382,181" href="/auth/nb" />
+		  <area shape="rect" coords="398,155,423,216" href="/auth/Honeywell-Orion" />
+			<area shape="rect" coords="463,125,492,185" href="/auth/AOL-Bellandur" />
+		  <area shape="rect" coords="524,145,552,204" href="/auth/bl" />
+		  <area shape="rect" coords="568,143,591,186" href="/auth/wf" />
+		  <area shape="rect" coords="396,60,416,103" href="/auth/pa" />
+		  <area shape="rect" coords="354,66,368,99" href="/auth/md" />
+		  <area shape="rect" coords="245,70,267,108" href="/auth/vbl" />
+		  <area shape="rect" coords="195,78,215,127" href="/auth/sr" />
+		  <area shape="rect" coords="170,48,186,92" href="/auth/dc" />
+		  <area shape="rect" coords="151,22,165,59" href="/auth/sb" />
+		  <area shape="rect" coords="111,37,130,77" href="/auth/Klubfit" />
+		  <area shape="rect" coords="76,50,91,86" href="/auth/si" />
+		  <area shape="rect" coords="44,104,63,148" href="/auth/mg" />
+		  <area shape="rect" coords="99,116,127,174" href="/auth/fz" />
+		  <area shape="rect" coords="188,152,213,213" href="/auth/Hyderabad-ECIL" />
+		  <area shape="rect" coords="244,123,272,182" href="/auth/kn" />
+		  <area shape="rect" coords="507,237,547,307" href="/auth/sk" />
+		  <area shape="rect" coords="429,215,457,280" href="/auth/Honeywell-Kalyani" />
+		  <area shape="rect" coords="466,303,508,385" href="/auth/sjw" />
+		  <area shape="rect" coords="363,310,398,390" href="/auth/ko" />
+		  <area shape="rect" coords="328,248,356,311" href="/auth/in" />
+		  <area shape="rect" coords="209,266,242,340" href="/auth/jp" />
+		  <area shape="rect" coords="154,208,184,273" href="/auth/pfs" />
+		  <area shape="rect" coords="84,230,119,304" href="/auth/Malleshwaram" />
+		  <area shape="rect" coords="13,209,37,270" href="/auth/VijayaNagar" />
+		  <area shape="rect" coords="17,296,47,369" href="/auth/bg" />
+		  <area shape="rect" coords="316,68,334,114" href="/auth/mb" />
+		  <area shape="rect" coords="135,340,173,418" href="/auth/jn" />
+		  <area shape="rect" coords="259,357,301,437" href="/auth/hs" />
+			 <area shape="circle" coords="308,214,43" href="/auth/strata" />
+		</map>
 	</div>
 </div>
 <div class="box span-7 last">
-	<h2>Sign in</h2>
+	<h3> Sign In Instructions </h3>
+	<h4> Franchisee's </h4>
+	<ol>
+		<li>Click on your branch location in the map, and you will be redirected to google for login.</li>
+		<li>Use your business gmail account to login </li>
+	</ol>
+	<h4> Strata Employees </h4>
+	<ol>
+		<li>Click on the earth (center) and use your strata.co.in </li>
+	</ol>
+	<hr/>
+	<h4>Administrator Sign In.</h4>
 	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 		  <p><%= f.label :username %>
 		  <%= f.text_field :username, :size => 20 %></p>
@@ -35,17 +66,6 @@
 			  <%= link_to "Forgot your password?", new_password_path(resource_name) %>
 			<% end -%>
 	<% end %>
-</div>
-<div class="box span-7 push-16 last">
-	<br/>
-	<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-		<span> New to Justbooks? Plans starting </span><span class='WebRupee'>Rs.</span> 150 / month.</span><br/><br/>
-	  <%= link_to "Sign up", new_registration_path(resource_name), :class => "signup_button round" %><br />
-		<div class="span-3">
-	  <%= link_to "About JustBooks", new_registration_path(resource_name)  %>
-		</div>
-		<div class="span-3 push-1">
-	  <%= link_to "About Strata Labs", new_registration_path(resource_name)  %>
-		</div>
-	<% end -%>
+
+	
 </div>

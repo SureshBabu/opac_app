@@ -10,7 +10,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101224054907) do
+ActiveRecord::Schema.define(:version => 20101231053733) do
+
+  create_table "addresses", :force => true do |t|
+    t.string   "address",     :limit => 900
+    t.string   "locality",    :limit => 200
+    t.string   "city",        :limit => 100
+    t.string   "state",       :limit => 100
+    t.string   "country",     :limit => 100
+    t.integer  "customer_id"
+    t.integer  "pincode"
+    t.integer  "mphone"
+    t.integer  "ophone"
+    t.integer  "hphone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "authentications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -36,6 +59,17 @@ ActiveRecord::Schema.define(:version => 20101224054907) do
     t.datetime "updated_at"
   end
 
+  create_table "cards", :force => true do |t|
+    t.string   "number",        :limit => 9
+    t.integer  "membership_id"
+    t.string   "status",        :limit => 2
+    t.date     "date_lost"
+    t.date     "date_issued"
+    t.date     "date_returned"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "categories", :force => true do |t|
     t.string   "name",       :null => false
     t.datetime "created_at"
@@ -44,6 +78,30 @@ ActiveRecord::Schema.define(:version => 20101224054907) do
   end
 
   # unrecognized index "index_categories_on_name_and_division" with type ActiveRecord::ConnectionAdapters::IndexDefinition
+
+  create_table "cities", :force => true do |t|
+    t.string   "cityname"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "customers", :force => true do |t|
+    t.string   "title"
+    t.string   "name"
+    t.string   "gender",                :limit => 2
+    t.date     "date_of_birth"
+    t.string   "email_id"
+    t.integer  "address_id"
+    t.string   "general_info_level",    :limit => 2
+    t.string   "email_info_level",      :limit => 2
+    t.string   "address_info_level",    :limit => 2
+    t.string   "book_shelf_info_level", :limit => 2
+    t.string   "groups_info_level",     :limit => 2
+    t.string   "favorites_info_level",  :limit => 2
+    t.string   "customer_type",         :limit => 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "ibtr_versions", :force => true do |t|
     t.integer  "ibtr_id"
@@ -78,19 +136,29 @@ ActiveRecord::Schema.define(:version => 20101224054907) do
     t.string   "comments"
   end
 
-  create_table "memberships", :force => true do |t|
-    t.string  "card_id"
-    t.integer "member_id"
-    t.string  "member"
-    t.string  "city"
-    t.integer "plan_id"
-    t.string  "plan"
-    t.integer "inactive"
+  create_table "memberpayments", :force => true do |t|
+    t.integer  "membership_id"
+    t.integer  "customer_id"
+    t.integer  "card_id"
+    t.decimal  "amount",                           :precision => 10, :scale => 0
+    t.string   "currency",          :limit => 4
+    t.string   "transaction_type",  :limit => 50
+    t.integer  "txn_branch_id"
+    t.integer  "account_branch_id"
+    t.integer  "plan_id"
+    t.string   "remarks",           :limit => 300
+    t.integer  "payment_mode"
+    t.integer  "original_id"
+    t.string   "status",            :limit => 4
+    t.string   "payment_details",   :limit => 100
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  # unrecognized index "index_memberships_on_card_id" with type ActiveRecord::ConnectionAdapters::IndexDefinition
-  # unrecognized index "index_memberships_on_card_id_and_member_id" with type ActiveRecord::ConnectionAdapters::IndexDefinition
-  # unrecognized index "index_memberships_on_member_id" with type ActiveRecord::ConnectionAdapters::IndexDefinition
+  create_table "plans", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "publishers", :force => true do |t|
     t.string   "name"
@@ -100,6 +168,12 @@ ActiveRecord::Schema.define(:version => 20101224054907) do
   end
 
   # unrecognized index "index_publishers_on_name" with type ActiveRecord::ConnectionAdapters::IndexDefinition
+
+  create_table "states", :force => true do |t|
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "stock", :id => false, :force => true do |t|
     t.integer "title_id"

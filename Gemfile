@@ -14,6 +14,7 @@ gem "transitions", :require => ["transitions", "active_record/transitions"]
 gem 'jquery-rails'
 gem 'activerecord-oracle_enhanced-adapter'
 gem 'acts_as_versioned'
+gem 'omniauth'
 
 # Use unicorn as the web server
 # gem 'unicorn'
