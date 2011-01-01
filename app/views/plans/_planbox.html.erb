@@ -1,0 +1,43 @@
+<%= link_to '#' do -%>
+	<div class="span-6">
+		<div class="planbox round">
+			<span class="planbox-title"><%= planbox.name %></span>
+			<span class="WebRupee planbox-rupee-symbol">Rs</span>
+			<span class="planbox-rupee"><%= rupee_part(effective_reading_fee(planbox.monthly_amount, signUpMonths)) %></span>
+			<span class="planbox-paise"><%= paise_part(effective_reading_fee(planbox.monthly_amount, signUpMonths)) %></span>
+			<span> / 
+				<% if planbox.subscription -%>
+					month
+				<% else %>
+					book
+				<% end -%>
+				</span><br/>
+			<% if planbox.subscription && free_months(signUpMonths) > 0 %>	
+				<div class="planbox-freemonths"><%= pluralize(free_months(signUpMonths), 'free month') %></div>
+			<% else %>
+				<div class="planbox-freemonths"><br/></div>
+			<% end %>
+			<hr/>
+			<div class='planbox-fees'>
+				<span>Security Deposit: <span style='float:right'><%= planbox.security_deposit %></span></span><br/>
+				<% if planbox.registration_fee > 0 -%>
+					<span>Registration Charges: <span style='float:right'><%= planbox.registration_fee %></span></span><br/>
+				<% else %>
+					<span>No Registration Charges!!</span>
+				<% end -%>
+			</div>
+			<hr/>
+			<% if planbox.reading_limit > 0 -%>
+				<div>Return within <%= pluralize(planbox.reading_limit, 'month') %></div>
+			<% else %>
+				<div>No Time Limit</div>
+			<% end -%>
+			<% if planbox.subscription %>
+				<hr/><div><%= pluralize(planbox.num_books, 'Book') %></div>
+				<% if planbox.num_magazines > 0 %>
+					<hr/><div><%= pluralize(planbox.num_magazines, 'Magazine') %></div>
+				<% end -%>
+			<% end -%>
+		</div>
+	</div>
+<% end -%>

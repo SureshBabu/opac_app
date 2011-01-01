@@ -1,0 +1,20 @@
+<div class="span-16 border">
+	<div class="span-4 push-4"><span class="plan-category">Subscription Plans</span></div>
+</div>
+<div class="span-5">
+	<div class="push-1"><span class="plan-category">Pay Per Book Plan</span></div>
+</div>
+<div class="span-16 border">	
+	<div class="plan-buttonpanel round">
+		<%= plan_button_link_to 'Monthly', {:controller => "plans", :signUpMonths => "1"} %>
+		<%= plan_button_link_to '6 Months', {:controller => "plans", :signUpMonths => "6"} %>
+		<%= plan_button_link_to '1 Year', {:controller => "plans", :signUpMonths => "12"} %>
+	</div>
+	<%= render :partial => 'planbox', :collection => @subscriptionplans, :locals => { :signUpMonths => params[:signUpMonths].to_i } %>
+</div>
+<div class="span-5">
+	<br/>
+	<br/>
+	<br/>
+	<%= render :partial => 'planbox', :collection => @perbookplans, :locals => { :signUpMonths => 0 } %>
+</div>

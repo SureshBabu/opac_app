@@ -1,5 +1,7 @@
 Opac::Application.routes.draw do
 
+  resources :plans
+
   match '/auth/:provider/callback' => 'authentications#create'
 
   get "stock/show"

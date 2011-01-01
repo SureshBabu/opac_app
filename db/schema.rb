@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101231053733) do
+ActiveRecord::Schema.define(:version => 20110101090547) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address",     :limit => 900
@@ -156,8 +156,17 @@ ActiveRecord::Schema.define(:version => 20101231053733) do
   end
 
   create_table "plans", :force => true do |t|
+    t.string   "name"
+    t.float    "security_deposit"
+    t.float    "registration_fee"
+    t.float    "reading_fee"
+    t.float    "magazine_fee"
+    t.integer  "num_books"
+    t.integer  "num_magazines"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "reading_limit"
+    t.boolean  "subscription"
   end
 
   create_table "publishers", :force => true do |t|
