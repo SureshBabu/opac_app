@@ -198,6 +198,9 @@ ActiveRecord::Schema.define(:version => 20110101175546) do
     t.string   "payment_ref",        :null => false
     t.string   "membership_no"
     t.string   "application_no"
+    t.string   "employee_no"
+    t.integer  "created_by",         :null => false
+    t.integer  "modified_by",        :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

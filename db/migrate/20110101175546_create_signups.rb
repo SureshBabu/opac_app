@@ -26,7 +26,12 @@ class CreateSignups < ActiveRecord::Migration
       
       t.string :membership_no
       t.string :application_no
+      
+      t.string :employee_no
 
+      t.integer :created_by, :null => false
+      t.integer :modified_by, :null => false
+      
       t.timestamps
     end
   end

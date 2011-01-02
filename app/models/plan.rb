@@ -4,8 +4,12 @@ class Plan < ActiveRecord::Base
   end
   
   def reading_fee_for_term(signUpMonths)
-    freeMonths = signUpMonths/6
-    monthly_amount * (signUpMonths - freeMonths)
+    if subscription
+      freeMonths = signUpMonths/6
+      monthly_amount * (signUpMonths - freeMonths)
+    else
+      0.0
+    end
   end
   
   def total_due_for_term(signUpMonths)

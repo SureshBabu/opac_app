@@ -92,6 +92,10 @@ $('#authors th a, #authors .pagination a, #authors td a').live('click', function
 	return false;
 });
 
-function test() {
-	alert('hello');
-}
+$('#new_signup input[name="signup[payment_mode]"]:radio').live('change', function() {
+	$('#new_signup #signup_check_div').hide();
+	$('#new_signup #signup_card_div').hide();
+	$('#new_signup #signup_card_no').val('');
+	$('#new_signup #signup_check_no').val('');
+	$('#new_signup input[name="signup[payment_mode]"]:radio:checked ~ span').show();
+});
