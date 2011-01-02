@@ -161,3 +161,28 @@ th .desc {
 	font-weight:bold;
 	font-size:120%;
 }
+
+div.heading {
+	padding:0.4em;
+	margin-bottom:1em;
+	border:2px solid black;
+	border-top-style:none;
+	border-right-style:none;
+	border-left-style:solid;
+	border-bottom-style:solid;
+	font-size:110%;
+  color: #fff;
+  background: #B51E24;
+	
+}
+
+input.simple {
+	border-top-style:none;
+	border-right-style:none;
+	border-left-style:none;
+	border-bottom-style:solid;
+	margin:0px;
+	padding:0px;
+	padding-top:4px;
+	font-size:16px;
+}

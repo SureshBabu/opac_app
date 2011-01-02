@@ -1,0 +1,71 @@
+<div class="span-17">
+	<div class="span-17">
+		<%= form_for @signup do |f| -%>
+			<div class="span-17 heading">
+				Enter Personal Details
+			</div>
+			
+			<div>
+				<%= f.label :name %>
+				<%= f.text_field :name, :class => 'title simple', :maxlength => 100, :style => 'width:626px' %>
+			</div>
+
+			<div>
+				<%= f.label :address %>
+				<%= f.text_field :address, :class => 'title simple', :maxlength => 100, :style => 'width:612px' %>
+			</div>
+
+			<div>
+				<%= f.label 'Phone' %>
+				<%= f.label '(M)'.capitalize() %> <%= f.telephone_field :mphone, :class => 'title simple', :maxlength => 10, :style => 'width:20%' %>
+				<%= f.label '(L)'.capitalize() %> <%= f.telephone_field :mphone, :class => 'title simple', :maxlength => 10, :style => 'width:20%' %>
+				<%= f.label :email %>
+				<%= f.text_field :email, :class => 'title simple', :maxlength => 100, :style => 'width:269px' %>
+			</div>
+
+			<div>
+				<%= f.label 'Referred By' %>
+				<%= f.text_field :referrer_member_id, :class => 'title simple', :maxlength => 20, :style => 'width:40%' %>
+				<%= f.label 'Employee Number' %>
+				<%= f.text_field :referrer_member_id, :class => 'title simple', :maxlength => 20, :style => 'width:200px' %>
+			</div>
+
+			<div class="span-17 heading" style='margin-top:25px'>
+				Enter Payment Details
+			</div>
+
+			<div>
+				<em>Thank you for signing up for <%= @signUpMonths %> months for the <%= @plan.name %> plan.</em>
+				<br/>
+				<em>Your bill details are as follows.</em>				
+			</div>
+			
+			<br/>
+			<div class='span-10' >
+				<div class='span-6' style='text-align:left'><%= f.label :security_deposit %> </div>
+				<div class='span-3 last' style='text-align:right'><%= f.label @plan.security_deposit  %></div>
+				<div class='span-6' style='text-align:left'><%= f.label :registration_fee %> </div>
+				<div class='span-3 last' style='text-align:right'><%= f.label @plan.registration_fee  %></div>
+				<div class='span-6' style='text-align:left'><%= f.label :reading_fee %>  ( <%= @plan.monthly_amount %> for <%= pluralize(@plan.pay_months_for_term(@signUpMonths), 'month') %> )</div>
+				<div class='span-3 last' style='text-align:right'><%= f.label @plan.reading_fee_for_term(@signUpMonths)  %></div>
+				<div class='span-6' style='text-align:left'><%= f.label :discount %></div>
+				<div class='span-3 last' style='text-align:right'><%= f.number_field :discount, :disabled => true, :class => 'title simple', :style => 'width:50px'  %></div>
+				<div class='span-6' style='text-align:left'><%= f.label 'Total' %></div>
+				<div class='span-3 last' style='text-align:right'><%= f.label @plan.total_due_for_term(@signUpMonths) %></div>
+				<br/>
+
+			</div>
+			
+			<hr/>
+			<div class='span-24'>
+					Cash <%= f.radio_button :payment_mode, 'cash' %>
+					Check <%= f.radio_button :payment_mode, 'check' %>
+					Card <%= f.radio_button :payment_mode, 'card' %>
+					<%= f.text_field :payment_ref %>
+			</div>
+			
+
+		<% end -%>
+	</div>
+
+</div>
