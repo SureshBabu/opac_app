@@ -1,3 +1,6 @@
+<%= javascript_tag :defer => 'defer' do -%>
+	$('#current_branch').html('<%= current_user.current_branch.name %>');
+<% end -%>
 
 <div class='notice'>
 	You are a staff of <b><%= Branch.branch_name_from_subdomain(current_user.subdomain) %>.</b>
@@ -5,44 +8,48 @@
 	<br/>
 	You are currently logged into <%= current_user.current_branch.name %>. 
 	
-	<% if @associate_branches.length > 0 -%>
+	<% if !current_user.strata_employee? && @associate_branches.length > 1 -%>
 		<hr/>
 		Click on any of the following branches to change your current branch.
 		<br/>
-		<ul>
+		<ol>
 			<% @associate_branches.each do |b| -%>
-				<li><%= link_to_function b.name, "$('#current_branch').html('#{b.name}')" %></li>
+				<li><%= link_to b.name, dashboard_path(:current_branch => b.id), :confirm => "Are you sure you want to change the branch to #{b.name}?" %></li>
 			<% end -%>
-		</ul>
+		</ol>
 	<% end -%>
 </div>
 
 <div class='span-24'>
-	<div class='span-24'>
-		<div class='span-2 menu-button menu-color'>
-			<div class='menu-icon'>
-				<%= link_to ibtrs_path do -%>
-					<%= image_tag 'IBT.png' %>
-				<% end -%>
-			</div>
-			<div class='span-1 menu-text'>
-				IBT
-			</div>
-		</div>
-	</div>
-	<div class='span-24' style='height:10px'>		
-	</div>
-	<div class='span-24'>	
-			<div class='span-1 menu-button menu-color'>
+	<% if current_user.strata_employee? %>
+		<div class='span-24'>
+			<div class='span-2 menu-button menu-color'>
 				<div class='menu-icon'>
-					<%= link_to :controller => 'plans', :action => 'index', :signUpMonths => 1 do -%>
-						<%= image_tag 'SignUp.png' %>
+					<%= link_to ibtrs_path do -%>
+						<%= image_tag 'IBT.png' %>
 					<% end -%>
 				</div>
 				<div class='span-1 menu-text'>
-					New Member
+					IBT
 				</div>
 			</div>
 		</div>
+	<% end -%>
+	<div class='span-24' style='height:10px'>		
 	</div>
+	<% if !current_user.strata_employee? %>
+		<div class='span-24'>	
+				<div class='span-1 menu-button menu-color'>
+					<div class='menu-icon'>
+						<%= link_to :controller => 'plans', :action => 'index', :signUpMonths => 1 do -%>
+							<%= image_tag 'SignUp.png' %>
+						<% end -%>
+					</div>
+					<div class='span-1 menu-text'>
+						New Member
+					</div>
+				</div>
+			</div>
+		</div>
+	<% end -%>
 </div>

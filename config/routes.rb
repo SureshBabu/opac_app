@@ -3,6 +3,8 @@ Opac::Application.routes.draw do
   resources :signups
 
   resources :plans
+  
+  match '/dashboard' => 'dashboard#show'
 
   match '/auth/:provider/callback' => 'authentications#create'
 

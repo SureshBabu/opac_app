@@ -20,7 +20,7 @@ class Branch < ActiveRecord::Base
           when 'mlm'  then 25
           when 'vij'  then 26
           when 'vjn'  then 31
-          else nil
+          else 801
           end
     id
   end
@@ -34,6 +34,11 @@ class Branch < ActiveRecord::Base
   end
   
   def self.associate_branches(subdomain)
-    find(:all, :conditions => ['parent_id = ?', branch_id_from_subdomain(subdomain)])
+    branch_id = branch_id_from_subdomain(subdomain)
+    if branch_id == 801
+      find(:all)
+    else
+      find(:all, :conditions => ['parent_id = ?', branch_id])
+    end
   end
 end
