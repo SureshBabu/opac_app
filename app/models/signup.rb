@@ -28,16 +28,7 @@ class Signup < ActiveRecord::Base
   
   before_save :set_defaults
   
-  
-  def total_paid
-    security_deposit + registration_fee + reading_fee - discount + advance_amt
-  end
-  
-  #TODO
-  def expiry_date
-    created_at
-  end
-  
+   
   private 
   
   def set_defaults
@@ -52,6 +43,14 @@ class Signup < ActiveRecord::Base
     self.reading_fee = plan.reading_fee_for_term(self.signup_months)
     self.discount = 0
     self.advance_amt = 0
+    self.paid_amt = self.security_deposit + self.registration_fee + self.reading_fee - self.discount + self.advance_amt
+    self.overdue_amt = 0
+    self.start_date = Date.today
+    if plan.subscription
+      self.expiry_date = self.start_date >> self.signup_months
+    else
+      self.expiry_date = self.start_date >> 100
+    end
   end
   
 end

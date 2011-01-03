@@ -6,11 +6,11 @@ Dear <b><%= @signup.name %></b>
 	<br/>
 	<br/>
 	     Your plan <b><%= @signup.plan.name %></b> that you subscribed to by
-             paying <b><%= @signup.total_paid %></b> lets you hold <b>
+             paying <b><%= @signup.paid_amt %></b> lets you hold <b>
             <%= @signup.plan.num_books %></b>
              book(s) and <b><%= @signup.plan.num_magazines %></b> magazine(s) at a given time.
                <br/>
-             Your membership is effective <%= @signup.created_at.strftime("%m-%d-%Y") %> and is paid until
+             Your membership is effective <%= @signup.start_date.strftime("%m-%d-%Y") %> and is paid until
              <%= @signup.expiry_date.strftime("%m-%d-%Y") %>. For the plan that you have chosen, you will be
              required to pay a reading fee of <b><%= @signup.plan.reading_fee %>
              </b> every <%= if @signup.plan.subscription 

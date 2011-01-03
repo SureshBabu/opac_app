@@ -18,8 +18,12 @@ class CreateSignups < ActiveRecord::Migration
       t.float :security_deposit, :null => false
       t.float :registration_fee, :null => false
       t.float :reading_fee, :null => false
-      t.float :discount, :null => false
-      t.float :advance_amt, :null => false
+      t.float :discount, :null => false # this is called adjusted_amt
+      t.float :advance_amt, :null => false # in case paid in excess
+      
+      t.float :paid_amt, :null => false # actually paid
+      t.float :overdue_amt, :null => false # in case paid less than expected
+      
       
       t.integer :payment_mode, :null => false
       t.string :payment_ref, :null => false
@@ -31,6 +35,12 @@ class CreateSignups < ActiveRecord::Migration
 
       t.integer :created_by, :null => false
       t.integer :modified_by, :null => false
+      
+      t.string :flag_migrated, :size => 2, :default => 'U'
+      t.date :start_date, :null => false
+      t.date :expiry_date, :null => false
+      t.string :remarks
+    
       
       t.timestamps
     end
