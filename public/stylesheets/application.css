@@ -186,3 +186,23 @@ input.simple {
 	padding-top:4px;
 	font-size:16px;
 }
+
+.menu-button {
+	width:81px;
+}
+
+.menu-icon {
+	width:100%;
+	margin-left:7px;
+}
+
+.menu-text {
+	text-align:center;
+	width:100%;
+}
+
+.menu-color {
+	background: #B51E24;
+	border: 5px ridge #B51E24;
+	color: #fff;
+}
