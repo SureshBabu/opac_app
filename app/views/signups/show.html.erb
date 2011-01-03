@@ -1,6 +1,7 @@
 
 <p><span style="font-family: geneva, arial, helvetica, sans-serif;font-size: 1.0em;"><u><b>Just Books Receipt/Payment Voucher</b></u></span></p>
-<%= button_to_function 'Print', "$('#receipt').printElement({})" %>
+<%= button_to_function 'Print', "$('#receipt').printElement({overrideElementCSS:['print.css',{ href:'print.css',media:'print'}],leaveOpen:true,printMode:'popup'});"
+%>
 <div id='receipt'>
 	<table>
 		<tr>
