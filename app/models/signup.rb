@@ -11,6 +11,7 @@ class Signup < ActiveRecord::Base
   
   belongs_to :user, :foreign_key => 'created_by'
   belongs_to :user, :foreign_key => 'modified_by'
+  belongs_to :plan
   
   
   validates :name, :presence => true, :length => { :minimum => 2, :maximum => 100 }
