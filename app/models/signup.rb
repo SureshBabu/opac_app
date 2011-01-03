@@ -47,9 +47,9 @@ class Signup < ActiveRecord::Base
     self.overdue_amt = 0
     self.start_date = Date.today
     if plan.subscription
-      self.expiry_date = self.start_date >> self.signup_months
+      self.expiry_date = self.start_date.next_month(self.signup_months)
     else
-      self.expiry_date = self.start_date >> 100
+      self.expiry_date = self.start_date.next_month(100)
     end
   end
   
