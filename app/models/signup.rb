@@ -12,6 +12,7 @@ class Signup < ActiveRecord::Base
   belongs_to :user, :foreign_key => 'created_by'
   belongs_to :user, :foreign_key => 'modified_by'
   belongs_to :plan
+  belongs_to :branch
   
   
   validates :name, :presence => true, :length => { :minimum => 2, :maximum => 100 }
@@ -26,6 +27,11 @@ class Signup < ActiveRecord::Base
   validates :email, :email => true
   
   before_save :set_defaults
+  
+  
+  def total_paid
+    security_deposit + registration_fee + reading_fee - discount + advance_amt
+  end
   
   private 
   

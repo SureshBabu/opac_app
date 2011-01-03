@@ -29,6 +29,7 @@ class SignupsController < ApplicationController
     
     if @signup.save
       redirect_to(@signup, :notice => 'Member Signed Up Successfully')
+      SignupMailer.registration_confirmation(@signup).deliver
     else
       @plan = Plan.find(@signup.plan_id)
       render :action => 'new'

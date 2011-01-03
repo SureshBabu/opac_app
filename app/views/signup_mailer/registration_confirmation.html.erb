@@ -1,0 +1,52 @@
+Dear <b><%= @signup.name %></b>
+	<br>
+	<br>
+		Welcome to JustBooks clc - the new generation community library chain!
+	<br>Thank you for visiting our library at <b><%= @signup.branch.name unless @signup.branch.nil? %></b> on <b><%= @signup.created_at.strftime("%m-%d-%Y") %></b> and signing up as a member.
+	<br>
+	<br>
+	Your plan and payment details are as followed:-
+	<br>Plan:- <b><%= @signup.plan.name %></b>
+	<br>Amount Paid:- <b><%= @signup.total_paid %></b>
+	<br>
+	<br>
+	A membership at Just Books comes with packed features. We would like to take a minute of your time and highlight some of the key features of your membership:
+	<br> 
+	<span style="padding-left:20px">- Unrestricted access - Sign up once and visit any of our branches and access all books at no additional cost</span>
+	<br>
+	<span style="padding-left:20px">- Access to our website - <%= @url %> where you can browse our catalogue and build a list of your favorite titles</span>
+	<br>
+	<span style="padding-left:20px">- Personalized services - Recommend a book to be added to our collection and get that issued to you when procured</span>
+	<br>
+	<span style="padding-left:20px">- Inter branch transfers - Request for books to be brought from the other branches if they are not available in your home branch</span>
+	<br>
+	<span style="padding-left:20px">- Reading fee waiver - If you are traveling or short on reading time, special requests can be made for waiver of reading fee</span>
+	<br>
+	<br>
+	Your online login details are:
+	<br>
+	Login-id:- <b><%= @signup.email %></b>
+	<br>
+	Password:- <b>JBGuest987</b>
+	<br>
+	<br>
+	For details on Terms & Conditions, please visit <a href="http://www.justbooksclc.com/TermsConditions.action">http://www.justbooksclc.com/TermsConditions.action</a>.
+	<br>
+	<br> 
+	<b>Please note</b>: If at any point, you are likely to be short on reading time for a certain period, please visit our branch, return all books and record a waiver request at the branch. JustBooks allows hiatus/intermission/breather to an active member, for a maximum period of three months without paying the monthly reading fees, after the first 3 months of membership.
+	<br>
+	<br>
+	<b><u><i>About JustBooks clc:</i></u></b>
+	<br>
+	JustBooks clc is a new generation book library chain that provides a unique reading experience to book lovers with a wide range of books for every type of reader - Toddlers to Teens, Dabblers to Bookworms under a modern, vibrant ambience with effective use of technology. Like we love saying - At JustBooks, there is a book for everyone in the family.
+	<br>
+	Warm Regards,
+	<br>
+	Team JustBooks
+	<br>
+	<br>
+	Contact Customer care:
+	<br>T: 080-60015285
+	<br>E: <a href="care@justbooksclc.com">care@justbooksclc.com</a>
+	<br>W: <a href="www.justbooksclc.com">www.justbooksclc.com</a>
+	<br>
