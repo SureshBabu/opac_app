@@ -4,7 +4,7 @@ class SignupMailer < ActionMailer::Base
   def registration_confirmation(signup)
     @url = 'http://www.justbooksclc.com'
     @signup = signup
-    mail(:to => signup.email, :subject => "Welcome To JustBooks")
+    mail(:to => signup.email, :subject => "Welcome To JustBooks")    
   end
 
 end

@@ -4,6 +4,8 @@
 <div class="span-5">
 	<div class="push-1"><span class="plan-category">Pay Per Book Plan</span></div>
 </div>
+<%= current_user.email %>
+<%=  %>
 <div class="span-16 border">	
 	<div class="plan-buttonpanel round">
 		<%= plan_button_link_to 'Monthly', {:controller => "plans", :signUpMonths => "1"} %>

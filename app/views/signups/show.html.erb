@@ -1,87 +1,107 @@
+<script type="text/javascript">
+  function setPrinterDiv(id){
+    document.getElementById(id).style.display = 'block';
+    $('#receipt').printElement({
+      overrideElementCSS:['print.css', { href:'print.css', media:'print'}],
+      leaveOpen:true,
+      printMode:'popup'
+    });
+		document.getElementById(id).style.display = 'none';
+  }
+</script>
 
-<p><span style="font-family: geneva, arial, helvetica, sans-serif;font-size: 1.0em;"><u><b>Just Books Receipt/Payment Voucher</b></u></span></p>
-<%= button_to_function 'Print', "$('#receipt').printElement({overrideElementCSS:['print.css',{ href:'print.css',media:'print'}],leaveOpen:true,printMode:'popup'});"
-%>
-<div id='receipt'>
-	<table>
-		<tr>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;">Received with thanks from:</td>
-		</tr>
-		<tr>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><u>Name</u></td>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><%= @signup.name %></td>
-		</tr>
-		<tr>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><u>Member#</u></td>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><%= @signup.membership_no %></td>
-		</tr>
-		<tr>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><u>Current Plan</u></td>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><%= @signup.plan.name %></td>
-		</tr>
-		<tr>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><u>Member since:</u></td>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><%= @signup.created_at.strftime("%m-%d-%Y") %></td>
-		</tr>
-		<tr>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><u>Paid For:</u></td>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><%= @signup.signup_months %> months</td>
-		</tr>
-		<tr>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><u>Reading Fee:</u></td>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><%= @signup.plan.reading_fee_for_term(@signup.signup_months) %> Rs.</td>
-		</tr>
-		<tr>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><u>From:</u></td>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><%= @signup.created_at.strftime("%m-%d-%Y")  %></td>
-		</tr>
-		<tr>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><u>To:</u></td>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;">[pending]</td>
-		</tr>
-		<tr>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><u>Security Deposit:</u></td>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"> <%= @signup.security_deposit %> Rs.</td>
-		</tr>
-		<tr>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><u>Other Fees:</u></td>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"> <%= @signup.registration_fee %> Rs.</td>
-		</tr>
-		<tr>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><u>Amt to be recd:</u></td>
-			<td bgcolor= "yellow" style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><%= @signup.plan.total_due_for_term(@signup.signup_months) %> Rs.</td>
-		</tr>
-		<tr>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><u>Amt paid:</u></td>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><%= @signup.total_paid %> Rs.</td>
-		</tr>
-		<tr>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><u>Balance to be paid:</u></td>
-			<td bgcolor = "pink" style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;">0 Rs.</td>
-		</tr>
-		<tr>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><u>Txn Date:</u></td>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><%= @signup.created_at.strftime("%m-%d-%Y") %></td>
-		</tr>
-		<tr>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><u>Pmt Mode:</u></td>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><%= @signup.payment_mode %></td>
-		</tr>
-		<tr>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><u>Staff:</u></td>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><%= @signup.created_by %></td>
-		</tr>
-		<tr>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"><u>Transaction Branch</u></td>
-			<td style="font-family: geneva, arial, helvetica, sans-serif;font-size: .75em;"> Pending </td>
-		</tr>
-	</table>
+<p><span style="font-family: geneva, arial, helvetica, sans-serif;font-size: 1.0em;"><u><b>Just Books Receipt/ Payment Voucher</b></u></span></p>
+<%= button_to_function 'Print Receipt', "setPrinterDiv('receipt');" %> <%= link_to 'Back to plans', plans_path %> 
+
+<br/><br/>
+This is the Registration confirmation email sent to your email id : <b><%= @signup.email %></b>
+<hr/>
+  <%= 
+        render :file => 'signup_mailer/registration_confirmation'
+  %>
+<br/>
+<hr/>
+
+<div id='receipt' style="display:none;">
+  <div style="font-weight: bold; font-size: 14px;">
+    Just Books Receipt/<br/>Payment Voucher
+  </div>
+  <div style="text-align:center;">	
+		<table>
+			<tr>
+				<td >Received with thanks from:</td>
+			</tr>
+			<tr>
+				<td ><u>Name</u></td>
+				<td ><%= @signup.name %></td>
+			</tr>
+			<tr>
+				<td ><u>Member#</u></td>
+				<td ><%= @signup.membership_no %></td>
+			</tr>
+			<tr>
+				<td ><u>Current Plan</u></td>
+				<td ><%= @signup.plan.name %></td>
+			</tr>
+			<tr>
+				<td ><u>Member since:</u></td>
+				<td ><%= @signup.created_at.strftime("%m-%d-%Y") %></td>
+			</tr>
+			<tr>
+				<td ><u>Paid For:</u></td>
+				<td ><%= @signup.signup_months %> months</td>
+			</tr>
+			<tr>
+				<td ><u>Reading Fee:</u></td>
+				<td ><%= @signup.plan.reading_fee_for_term(@signup.signup_months) %> Rs.</td>
+			</tr>
+			<tr>
+				<td ><u>From:</u></td>
+				<td ><%= @signup.created_at.strftime("%m-%d-%Y")  %></td>
+			</tr>
+			<tr>
+				<td ><u>To:</u></td>
+				<td ><%= @signup.expiry_date.strftime("%m-%d-%Y") %></td>
+			</tr>
+			<tr>
+				<td ><u>Security Deposit:</u></td>
+				<td > <%= @signup.security_deposit %> Rs.</td>
+			</tr>
+			<tr>
+				<td ><u>Other Fees:</u></td>
+				<td > <%= @signup.registration_fee %> Rs.</td>
+			</tr>
+			<tr>
+				<td ><u>Amt to be recd:</u></td>
+				<td bgcolor= "yellow" ><%= @signup.plan.total_due_for_term(@signup.signup_months) %> Rs.</td>
+			</tr>
+			<tr>
+				<td ><u>Amt paid:</u></td>
+				<td ><%= @signup.total_paid %> Rs.</td>
+			</tr>
+			<tr>
+				<td ><u>Balance to be paid:</u></td>
+				<td bgcolor = "pink" >0 Rs.</td>
+			</tr>
+			<tr>
+				<td ><u>Txn Date:</u></td>
+				<td ><%= @signup.created_at.strftime("%m-%d-%Y") %></td>
+			</tr>
+			<tr>
+				<td ><u>Pmt Mode:</u></td>
+				<td ><%= @signup.payment_mode %></td>
+			</tr>
+			<tr>
+				<td ><u>Staff:</u></td>
+				<td ><%= @signup.created_by %></td>
+			</tr>
+			<tr>
+				<td ><u>Transaction Branch</u></td>
+				<td > <%= @signup.branch.name %> </td>
+			</tr>
+		</table>
+	</div>
 	<p>
 	 	<p style="font-family: geneva, arial, helvetica, sans-serif;font-size: 0.75em;">Thank You For the Love of Books</p>
 	</p>
 </div>
-
-
-
-<%= link_to 'Edit', edit_signup_path(@signup) %> |
-<%= link_to 'Back', signup_path %>

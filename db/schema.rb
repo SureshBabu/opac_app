@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110101090547) do
+ActiveRecord::Schema.define(:version => 20110101175546) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address",     :limit => 900
@@ -177,6 +177,33 @@ ActiveRecord::Schema.define(:version => 20110101090547) do
   end
 
   # unrecognized index "index_publishers_on_name" with type ActiveRecord::ConnectionAdapters::IndexDefinition
+
+  create_table "signups", :force => true do |t|
+    t.string   "name",               :null => false
+    t.string   "address",            :null => false
+    t.integer  "mphone"
+    t.integer  "lphone"
+    t.string   "email",              :null => false
+    t.string   "referrer_member_id"
+    t.integer  "referrer_cust_id"
+    t.integer  "plan_id",            :null => false
+    t.integer  "branch_id"
+    t.integer  "signup_months",      :null => false
+    t.float    "security_deposit",   :null => false
+    t.float    "registration_fee",   :null => false
+    t.float    "reading_fee",        :null => false
+    t.float    "discount",           :null => false
+    t.float    "advance_amt",        :null => false
+    t.integer  "payment_mode",       :null => false
+    t.string   "payment_ref",        :null => false
+    t.string   "membership_no"
+    t.string   "application_no"
+    t.string   "employee_no"
+    t.integer  "created_by",         :null => false
+    t.integer  "modified_by",        :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "states", :force => true do |t|
     t.string   "state"

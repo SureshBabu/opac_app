@@ -33,6 +33,11 @@ class Signup < ActiveRecord::Base
     security_deposit + registration_fee + reading_fee - discount + advance_amt
   end
   
+  #TODO
+  def expiry_date
+    created_at
+  end
+  
   private 
   
   def set_defaults

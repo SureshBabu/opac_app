@@ -25,6 +25,8 @@ class SignupsController < ApplicationController
         when Signup::PAYMENT_MODES[:cash] then 'cash'
         else 'cash'
         end
+        
+      q.branch_id = user_session['current_branch'].id
     end
     
     if @signup.save
