@@ -7,15 +7,26 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
+  attr_accessor :current_branch
   attr_accessible :username, :email, :password, :password_confirmation, :remember_me
   
   def apply_omniauth(omniauth)
     self.email = omniauth['user_info']['email'] if email.blank?
     self.username = omniauth['user_info']['name'] if username.blank?
+      
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
   
   def password_required?
     (authentications.empty? || !password.blank?) && super
   end
+  
+  def strata_employee?
+    email.gsub(/.*@/,'').split('.').include?('strata')
+  end
+  
+  def subdomain
+    email.gsub(/.*@/,'').split('.')[0]
+  end
+
 end

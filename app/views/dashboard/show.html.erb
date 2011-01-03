@@ -1,3 +1,22 @@
+
+<div class='notice'>
+	You are a staff of <b><%= Branch.branch_name_from_subdomain(current_user.subdomain) %>.</b>
+	If this is not correct, call tech support.
+	<br/>
+	You are currently logged into <%= current_user.current_branch.name %>. 
+	
+	<% if @associate_branches.length > 0 -%>
+		<hr/>
+		Click on any of the following branches to change your current branch.
+		<br/>
+		<ul>
+			<% @associate_branches.each do |b| -%>
+				<li><%= link_to_function b.name, "$('#current_branch').html('#{b.name}')" %></li>
+			<% end -%>
+		</ul>
+	<% end -%>
+</div>
+
 <div class='span-24'>
 	<div class='span-24'>
 		<div class='span-2 menu-button menu-color'>
