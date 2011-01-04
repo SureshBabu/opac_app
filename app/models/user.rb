@@ -28,5 +28,9 @@ class User < ActiveRecord::Base
   def subdomain
     email.gsub(/.*@/,'').split('.')[0]
   end
+  
+  def frontoffice?
+    email.split('@')[0].downcase.eql?('frontoffice')
+  end
 
 end
