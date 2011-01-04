@@ -25,9 +25,17 @@ class Signup < ActiveRecord::Base
   validates :application_no, :presence => true, :uniqueness => true, :length => { :maximum => 10 }
   validates :payment_mode, :presence => true, :numericality => {:greater_than => 0, :less_than => 4 }
   validates :email, :email => true
+  validate :payment_ref_should_not_be_blank
   
   before_save :set_defaults
   
+  
+  def payment_ref_should_not_be_blank
+    if payment_ref.blank? 
+      errors.add(:check_no, "should not be blank!") if payment_mode == Signup::PAYMENT_MODES[:check]
+      errors.add(:card_no, "should not be blank") if payment_mode == Signup::PAYMENT_MODES[:card]
+    end
+  end
    
   private 
   
