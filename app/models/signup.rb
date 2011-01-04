@@ -17,23 +17,39 @@ class Signup < ActiveRecord::Base
   
   validates :name, :presence => true, :length => { :minimum => 2, :maximum => 100 }
   validates :address, :presence => true, :length => { :minimum => 2, :maximum => 100 }
-  validates :mphone, :numericality => true, :length => { :minimum => 7, :maximum => 10 }
-  validates :lphone, :numericality => true, :length => { :minimum => 7, :maximum => 10 }
   validates :referrer_member_id, :length => { :maximum => 10 }
   validates :employee_no, :length => { :maximum => 10 }
   validates :membership_no, :presence => true, :uniqueness => true, :length => { :is => 7 }
-  validates :application_no, :presence => true, :uniqueness => true, :length => { :maximum => 10 }
+#  validates :application_no, :presence => true, :uniqueness => true, :length => { :maximum => 10 }
   validates :payment_mode, :presence => true, :numericality => {:greater_than => 0, :less_than => 4 }
   validates :email, :email => true
   validate :payment_ref_should_not_be_blank
+  validate :atleast_one_phone_number_required
   
   before_save :set_defaults
   
   
   def payment_ref_should_not_be_blank
     if payment_ref.blank? 
-      errors.add(:check_no, "should not be blank!") if payment_mode == Signup::PAYMENT_MODES[:check]
+      errors.add(:check_no, "should not be blank") if payment_mode == Signup::PAYMENT_MODES[:check]
       errors.add(:card_no, "should not be blank") if payment_mode == Signup::PAYMENT_MODES[:card]
+    end
+  end
+  
+  def atleast_one_phone_number_required
+    if mphone.blank? && lphone.blank?
+      errors.add(:mphone, "is required")
+    end
+    unless lphone.blank?
+      begin
+        errors.add(:lphone, "is more than 10 digits") if lphone.to_s.length > 10
+        errors.add(:lphone, "is less than 8 digits") if lphone.to_s.length < 8
+      end
+    end
+    unless mphone.blank?
+      begin
+        errors.add(:mphone, "should be 10 digits") if mphone.to_s.length != 10
+      end
     end
   end
    
@@ -43,6 +59,7 @@ class Signup < ActiveRecord::Base
     plan = Plan.find(plan_id)
     
     self.referrer_cust_id = nil
+    self.application_no = '1'
 
     # these values are possibly allowed to be changed during sign-up
     # dont have time to do this
