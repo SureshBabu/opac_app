@@ -21,8 +21,8 @@ class Signup < ActiveRecord::Base
   validates :lphone, :numericality => true, :length => { :minimum => 7, :maximum => 10 }
   validates :referrer_member_id, :length => { :maximum => 10 }
   validates :employee_no, :length => { :maximum => 10 }
-  validates :membership_no, :presence => true, :length => { :maximum => 10 }
-  validates :application_no, :presence => true, :length => { :maximum => 10 }
+  validates :membership_no, :presence => true, :uniqueness => true, :length => { :is => 7 }
+  validates :application_no, :presence => true, :uniqueness => true, :length => { :maximum => 10 }
   validates :payment_mode, :presence => true, :numericality => {:greater_than => 0, :less_than => 4 }
   validates :email, :email => true
   
