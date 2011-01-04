@@ -66,9 +66,9 @@
 			<div>
 				<em>Thank you for signing up 
 				<% if @plan.subscription -%> 
-					for <%= @signup.signup_months %> months 
+					for <b><%= pluralize(@signup.signup_months, 'month') %> </b>
 				<% end -%>
-				for the <%= @plan.name %> plan. Your bill details are as follows.</em>				
+				for the <b><%= @plan.name %></b> plan. Changed your mind? <%= link_to 'Back to plans', :controller => "plans", :signUpMonths => @signup.signup_months %> .</em>
 			</div>
 			
 			<br/>
