@@ -22,8 +22,8 @@ class SignupsController < ApplicationController
       q.payment_ref = case params[:signup][:payment_mode].to_i
         when Signup::PAYMENT_MODES[:check] then params[:signup][:check_no]
         when Signup::PAYMENT_MODES[:card] then params[:signup][:card_no]
-        when Signup::PAYMENT_MODES[:cash] then 'cash'
-        else 'cash'
+        when Signup::PAYMENT_MODES[:cash] then 'Cash'
+        else 'Cash'
         end
         
       q.branch_id = user_session['current_branch'].id
